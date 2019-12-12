@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+}
+
+group 'net.rgsw'
+version '1.0'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+publishing {
+    publications {
+        maven( MavenPublication ) {
+            groupId = 'net.rgsw'
+            artifactId = 'noise'
+            version = '1.0'
+
+            from components.java
+        }
+    }
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri( "https://maven.pkg.github.com/RedGalaxySW/TheModernity" )
+            credentials {
+                username = gprUser.toLowerCase()
+                password = gprKey.toLowerCase()
+            }
+        }
+    }
+}
