@@ -4,7 +4,7 @@ plugins {
 }
 
 group 'net.rgsw'
-version '1.0'
+version '1.0.1'
 
 sourceCompatibility = 1.8
 
@@ -12,18 +12,24 @@ repositories {
     mavenCentral()
 }
 
+task sourceJar(type: Jar) {
+    classifier 'sources'
+    from sourceSets.main.allJava
+}
+
+
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
 }
 
 publishing {
     publications {
         maven( MavenPublication ) {
-            groupId = 'net.rgsw'
+            groupId = project.group
             artifactId = 'noise'
-            version = '1.0'
+            version = project.version
 
             from components.java
+            artifact tasks.sourceJar
         }
     }
     repositories {
