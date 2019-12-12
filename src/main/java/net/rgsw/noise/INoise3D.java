@@ -14,19 +14,6 @@ package net.rgsw.noise;
  */
 @FunctionalInterface
 public interface INoise3D {
-    /**
-     * Generates noise at integer coordinates. This simply converts the integers to doubles and calls {@link
-     * #generate(double, double, double)}.
-     *
-     * @param x The x coordinate
-     * @param y The y coordinate
-     * @param z The z coordinate
-     * @return The generated noise value
-     */
-    default double generate( int x, int y, int z ) {
-        return this.generate( (double) x, (double) y, (double) z );
-    }
-
 
     default double generateMultiplied( double x, double y, double z, double multiplier ) {
         return generate( x, y, z ) * multiplier;

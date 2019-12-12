@@ -46,22 +46,48 @@ public class Perlin3D extends Noise3D {
     }
 
     private static final int[][] GRAD = {
-        { - 1, - 1, 0 }, { - 1, 1, 0 }, { 1, - 1, 0 }, { 1, 1, 0 },
-        { - 1, 0, - 1 }, { - 1, 0, 1 }, { 1, 0, - 1 }, { 1, 0, 1 },
-        { 0, - 1, - 1 }, { 0, 1, - 1 }, { 0, - 1, 1 }, { 0, 1, 1 },
-        { - 1, - 1, 0 }, { - 1, 1, 0 }, { 1, - 1, 0 }, { 1, 1, 0 },
-        { - 1, 0, - 1 }, { - 1, 0, 1 }, { 1, 0, - 1 }, { 1, 0, 1 },
-        { 0, - 1, - 1 }, { 0, 1, - 1 }, { 0, - 1, 1 }, { 0, 1, 1 },
-        { - 1, - 1, 0 }, { - 1, 1, 0 }, { 1, - 1, 0 }, { 1, 1, 0 },
-        { - 1, 0, - 1 }, { - 1, 0, 1 }, { 1, 0, - 1 }, { 1, 0, 1 }
+        { - 1, - 1, 0 },
+        { - 1, 1, 0 },
+        { 1, - 1, 0 },
+        { 1, 1, 0 },
+        { - 1, 0, - 1 },
+        { - 1, 0, 1 },
+        { 1, 0, - 1 },
+        { 1, 0, 1 },
+        { 0, - 1, - 1 },
+        { 0, 1, - 1 },
+        { 0, - 1, 1 },
+        { 0, 1, 1 },
+        { - 1, - 1, 0 },
+        { - 1, 1, 0 },
+        { 1, - 1, 0 },
+        { 1, 1, 0 },
+        { - 1, 0, - 1 },
+        { - 1, 0, 1 },
+        { 1, 0, - 1 },
+        { 1, 0, 1 },
+
+        // Extra values to prevent slow % operator...
+        { 0, - 1, - 1 },
+        { 0, 1, - 1 },
+        { 0, - 1, 1 },
+        { 0, 1, 1 },
+        { - 1, - 1, 0 },
+        { - 1, 1, 0 },
+        { 1, - 1, 0 },
+        { 1, 1, 0 },
+        { - 1, 0, - 1 },
+        { - 1, 0, 1 },
+        { 1, 0, - 1 },
+        { 1, 0, 1 }
     };
 
     private int gradIndex( int x, int y, int z ) {
-        int hash = Hash.hash3I( this.seed, x, y, z );
+        int hash = Hash.hash3I( seed, x, y, z );
         return hash & 31;
     }
 
-    private double lerp( double a, double b, double x ) {
+    private static double lerp( double a, double b, double x ) {
         return a + x * ( b - a );
     }
 
@@ -76,9 +102,9 @@ public class Perlin3D extends Noise3D {
 
     @Override
     public double generate( double x, double y, double z ) {
-        x /= this.scaleX;
-        y /= this.scaleY;
-        z /= this.scaleZ;
+        x /= scaleX;
+        y /= scaleY;
+        z /= scaleZ;
 
         int minx = fastfloor( x );
         int miny = fastfloor( y );
@@ -91,14 +117,14 @@ public class Perlin3D extends Noise3D {
         double smoothz = smooth( z - minz );
 
 
-        int idx1 = this.gradIndex( minx, miny, minz );
-        int idx2 = this.gradIndex( maxx, miny, minz );
-        int idx3 = this.gradIndex( minx, maxy, minz );
-        int idx4 = this.gradIndex( maxx, maxy, minz );
-        int idx5 = this.gradIndex( minx, miny, maxz );
-        int idx6 = this.gradIndex( maxx, miny, maxz );
-        int idx7 = this.gradIndex( minx, maxy, maxz );
-        int idx8 = this.gradIndex( maxx, maxy, maxz );
+        int idx1 = gradIndex( minx, miny, minz );
+        int idx2 = gradIndex( maxx, miny, minz );
+        int idx3 = gradIndex( minx, maxy, minz );
+        int idx4 = gradIndex( maxx, maxy, minz );
+        int idx5 = gradIndex( minx, miny, maxz );
+        int idx6 = gradIndex( maxx, miny, maxz );
+        int idx7 = gradIndex( minx, maxy, maxz );
+        int idx8 = gradIndex( maxx, maxy, maxz );
 
         int[] grad1 = GRAD[ idx1 ];
         int[] grad2 = GRAD[ idx2 ];
@@ -143,13 +169,13 @@ public class Perlin3D extends Noise3D {
         double dot7 = dist71 * grad7[ 0 ] + dist72 * grad7[ 1 ] + dist73 * grad7[ 2 ];
         double dot8 = dist81 * grad8[ 0 ] + dist82 * grad8[ 1 ] + dist83 * grad8[ 2 ];
 
-        double lerp12 = this.lerp( dot1, dot2, smoothx );
-        double lerp34 = this.lerp( dot3, dot4, smoothx );
-        double lerp1234 = this.lerp( lerp12, lerp34, smoothy );
-        double lerp56 = this.lerp( dot5, dot6, smoothx );
-        double lerp78 = this.lerp( dot7, dot8, smoothx );
-        double lerp5678 = this.lerp( lerp56, lerp78, smoothy );
+        double lerp12 = lerp( dot1, dot2, smoothx );
+        double lerp34 = lerp( dot3, dot4, smoothx );
+        double lerp1234 = lerp( lerp12, lerp34, smoothy );
+        double lerp56 = lerp( dot5, dot6, smoothx );
+        double lerp78 = lerp( dot7, dot8, smoothx );
+        double lerp5678 = lerp( lerp56, lerp78, smoothy );
 
-        return this.lerp( lerp1234, lerp5678, smoothz );
+        return lerp( lerp1234, lerp5678, smoothz );
     }
 }

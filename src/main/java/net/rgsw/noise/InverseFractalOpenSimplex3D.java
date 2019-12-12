@@ -10,7 +10,7 @@
 package net.rgsw.noise;
 
 /**
- * Fractal-OpenSimplex noise generator for 3D space. This generator uses a specified amount of {@link
+ * Inverse-Fractal-OpenSimplex noise generator for 3D space. This generator uses a specified amount of {@link
  * OpenSimplex3D}-instances as octaves.
  */
 public class InverseFractalOpenSimplex3D extends Noise3D {
@@ -18,7 +18,7 @@ public class InverseFractalOpenSimplex3D extends Noise3D {
     private final OpenSimplex3D[] noiseOctaves;
 
     /**
-     * Constructs a Fractal-OpenSimplex noise generator.
+     * Constructs a Inverse-Fractal-OpenSimplex noise generator.
      *
      * @param seed    The seed, may be any {@code int}.
      * @param octaves The amount of octaves.
@@ -30,15 +30,15 @@ public class InverseFractalOpenSimplex3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex3D[ octaves ];
+        noiseOctaves = new OpenSimplex3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex3D( seed );
+            noiseOctaves[ i ] = new OpenSimplex3D( seed );
         }
     }
 
     /**
-     * Constructs a Fractal-OpenSimplex noise generator.
+     * Constructs a Inverse-Fractal-OpenSimplex noise generator.
      *
      * @param seed    The seed, may be any {@code int}.
      * @param scale   The coordinate scaling along every axis.
@@ -51,15 +51,15 @@ public class InverseFractalOpenSimplex3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex3D[ octaves ];
+        noiseOctaves = new OpenSimplex3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex3D( seed );
+            noiseOctaves[ i ] = new OpenSimplex3D( seed );
         }
     }
 
     /**
-     * Constructs a Fractal-OpenSimplex noise generator.
+     * Constructs a Inverse-Fractal-OpenSimplex noise generator.
      *
      * @param seed    The seed, may be any {@code int}.
      * @param scaleX  The coordinate scaling along X axis.
@@ -74,18 +74,18 @@ public class InverseFractalOpenSimplex3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex3D[ octaves ];
+        noiseOctaves = new OpenSimplex3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex3D( seed );
+            noiseOctaves[ i ] = new OpenSimplex3D( seed );
         }
     }
 
     @Override
     public double generate( double x, double y, double z ) {
-        x /= this.scaleX;
-        y /= this.scaleY;
-        z /= this.scaleZ;
+        x /= scaleX;
+        y /= scaleY;
+        z /= scaleZ;
 
         double d = 1;
         double n = 0;
@@ -100,8 +100,8 @@ public class InverseFractalOpenSimplex3D extends Noise3D {
     @Override
     public void setSeed( int seed ) {
         this.seed = seed;
-        for( OpenSimplex3D noise : this.noiseOctaves ) {
-            noise.setSeed( this.seed );
+        for( OpenSimplex3D noise : noiseOctaves ) {
+            noise.setSeed( seed );
         }
     }
 }

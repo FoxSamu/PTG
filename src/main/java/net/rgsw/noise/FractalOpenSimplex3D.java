@@ -30,10 +30,10 @@ public class FractalOpenSimplex3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex3D[ octaves ];
+        noiseOctaves = new OpenSimplex3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex3D( seed );
+            noiseOctaves[ i ] = new OpenSimplex3D( seed + i );
         }
     }
 
@@ -51,10 +51,10 @@ public class FractalOpenSimplex3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex3D[ octaves ];
+        noiseOctaves = new OpenSimplex3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex3D( seed );
+            noiseOctaves[ i ] = new OpenSimplex3D( seed );
         }
     }
 
@@ -74,23 +74,23 @@ public class FractalOpenSimplex3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex3D[ octaves ];
+        noiseOctaves = new OpenSimplex3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex3D( seed );
+            noiseOctaves[ i ] = new OpenSimplex3D( seed );
         }
     }
 
     @Override
     public double generate( double x, double y, double z ) {
-        x /= this.scaleX;
-        y /= this.scaleY;
-        z /= this.scaleZ;
+        x /= scaleX;
+        y /= scaleY;
+        z /= scaleZ;
 
         double d = 1;
         double n = 0;
 
-        for( OpenSimplex3D noise : this.noiseOctaves ) {
+        for( OpenSimplex3D noise : noiseOctaves ) {
             n += noise.generate( x * d, y * d, z * d ) / d;
             d *= 2;
         }
@@ -100,8 +100,8 @@ public class FractalOpenSimplex3D extends Noise3D {
     @Override
     public void setSeed( int seed ) {
         this.seed = seed;
-        for( OpenSimplex3D noise : this.noiseOctaves ) {
-            noise.setSeed( this.seed );
+        for( OpenSimplex3D noise : noiseOctaves ) {
+            noise.setSeed( seed++ );
         }
     }
 }

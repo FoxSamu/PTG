@@ -10,14 +10,17 @@
 package net.rgsw.noise;
 
 /**
- * Helper class that generates random values based on a seed and coordinates, using hash functions.
+ * Utility class that generates random values based on a seed and coordinates, using hash functions.
  */
-public class Hash {
+public final class Hash {
 
     private final static int X_PRIME = 1619;
     private final static int Y_PRIME = 31337;
     private final static int Z_PRIME = 6971;
     private final static int W_PRIME = 1013;
+
+    private Hash() {
+    }
 
     /**
      * Generates a random double value between -1 and 1 for 1D coordinates.
@@ -31,7 +34,7 @@ public class Hash {
         if( x < 0 ) x = Integer.MAX_VALUE + x;
         hash ^= X_PRIME * x;
 
-        hash = hash * hash * hash * 60493;
+        hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
         return (double) ( hash & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
@@ -52,7 +55,7 @@ public class Hash {
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
 
-        hash = hash * hash * hash * 60493;
+        hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
         return (double) ( hash & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
@@ -76,7 +79,7 @@ public class Hash {
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
 
-        hash = hash * hash * hash * 60493;
+        hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
         return (double) ( hash & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
@@ -103,7 +106,7 @@ public class Hash {
         hash ^= Z_PRIME * z;
         hash ^= W_PRIME * w;
 
-        hash = hash * hash * hash * 60493;
+        hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
         return (double) ( hash & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
@@ -121,7 +124,7 @@ public class Hash {
         if( x < 0 ) x = Integer.MAX_VALUE + x;
         hash ^= X_PRIME * x;
 
-        hash = hash * hash * hash * 60493;
+        hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
         return hash;
@@ -142,7 +145,7 @@ public class Hash {
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
 
-        hash = hash * hash * hash * 60493;
+        hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
         return hash;
@@ -166,7 +169,7 @@ public class Hash {
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
 
-        hash = hash * hash * hash * 60493;
+        hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
         return hash;
@@ -193,7 +196,7 @@ public class Hash {
         hash ^= Z_PRIME * z;
         hash ^= W_PRIME * w;
 
-        hash = hash * hash * hash * 60493;
+        hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
         return hash;

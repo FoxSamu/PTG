@@ -30,10 +30,10 @@ public class FractalOpenSimplex2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex2D( seed );
+            noiseOctaves[ i ] = new OpenSimplex2D( seed + i );
         }
     }
 
@@ -51,10 +51,10 @@ public class FractalOpenSimplex2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex2D( seed );
+            noiseOctaves[ i ] = new OpenSimplex2D( seed );
         }
     }
 
@@ -73,23 +73,23 @@ public class FractalOpenSimplex2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex2D( seed );
+            noiseOctaves[ i ] = new OpenSimplex2D( seed );
         }
     }
 
     @Override
     public double generate( double x, double y ) {
-        x /= this.scaleX;
-        y /= this.scaleY;
+        x /= scaleX;
+        y /= scaleY;
 
         double t = 0;
         double d = 1;
         double n = 0;
 
-        for( OpenSimplex2D noise : this.noiseOctaves ) {
+        for( OpenSimplex2D noise : noiseOctaves ) {
             t += 1 / d;
             n += noise.generate( x * d, y * d ) / d;
             d *= 2;
@@ -100,8 +100,8 @@ public class FractalOpenSimplex2D extends Noise2D {
     @Override
     public void setSeed( int seed ) {
         this.seed = seed;
-        for( OpenSimplex2D noise : this.noiseOctaves ) {
-            noise.setSeed( this.seed );
+        for( OpenSimplex2D noise : noiseOctaves ) {
+            noise.setSeed( seed++ );
         }
     }
 }

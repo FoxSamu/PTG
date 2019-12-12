@@ -30,10 +30,10 @@ public class FractalPerlin3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new Perlin3D[ octaves ];
+        noiseOctaves = new Perlin3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new Perlin3D( seed );
+            noiseOctaves[ i ] = new Perlin3D( seed );
         }
     }
 
@@ -51,10 +51,10 @@ public class FractalPerlin3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new Perlin3D[ octaves ];
+        noiseOctaves = new Perlin3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new Perlin3D( seed );
+            noiseOctaves[ i ] = new Perlin3D( seed );
         }
     }
 
@@ -74,24 +74,24 @@ public class FractalPerlin3D extends Noise3D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new Perlin3D[ octaves ];
+        noiseOctaves = new Perlin3D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new Perlin3D( seed );
+            noiseOctaves[ i ] = new Perlin3D( seed );
         }
     }
 
     @Override
     public double generate( double x, double y, double z ) {
-        x /= this.scaleX;
-        y /= this.scaleY;
-        z /= this.scaleZ;
+        x /= scaleX;
+        y /= scaleY;
+        z /= scaleZ;
 
         double t = 0;
         double d = 1;
         double n = 0;
 
-        for( Perlin3D noise : this.noiseOctaves ) {
+        for( Perlin3D noise : noiseOctaves ) {
             t += 1 / d;
             n += noise.generate( x * d, y * d, z * d ) / d;
             d *= 2;
@@ -102,8 +102,8 @@ public class FractalPerlin3D extends Noise3D {
     @Override
     public void setSeed( int seed ) {
         this.seed = seed;
-        for( Perlin3D perlin : this.noiseOctaves ) {
-            perlin.setSeed( this.seed );
+        for( Perlin3D perlin : noiseOctaves ) {
+            perlin.setSeed( seed++ );
         }
     }
 }

@@ -10,7 +10,7 @@
 package net.rgsw.noise;
 
 /**
- * Fractal-OpenSimplex noise generator for 2D space. This generator uses a specified amount of {@link
+ * Inverse-Fractal-OpenSimplex noise generator for 2D space. This generator uses a specified amount of {@link
  * OpenSimplex2D}-instances as octaves.
  */
 public class InverseFractalOpenSimplex2D extends Noise2D {
@@ -18,7 +18,7 @@ public class InverseFractalOpenSimplex2D extends Noise2D {
     private final OpenSimplex2D[] noiseOctaves;
 
     /**
-     * Constructs a Fractal-OpenSimplex noise generator.
+     * Constructs a Inverse-Fractal-OpenSimplex noise generator.
      *
      * @param seed    The seed, may be any {@code int}.
      * @param octaves The amount of octaves.
@@ -30,15 +30,15 @@ public class InverseFractalOpenSimplex2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex2D( seed );
+            noiseOctaves[ i ] = new OpenSimplex2D( seed + i );
         }
     }
 
     /**
-     * Constructs a Fractal-OpenSimplex noise generator.
+     * Constructs a Inverse-Fractal-OpenSimplex noise generator.
      *
      * @param seed    The seed, may be any {@code int}.
      * @param scale   The coordinate scaling along every axis.
@@ -51,10 +51,10 @@ public class InverseFractalOpenSimplex2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex2D( seed );
+            noiseOctaves[ i ] = new OpenSimplex2D( seed );
         }
     }
 
@@ -73,23 +73,23 @@ public class InverseFractalOpenSimplex2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new OpenSimplex2D( seed );
+            noiseOctaves[ i ] = new OpenSimplex2D( seed );
         }
     }
 
     @Override
     public double generate( double x, double y ) {
-        x /= this.scaleX;
-        y /= this.scaleY;
+        x /= scaleX;
+        y /= scaleY;
 
         double t = 0;
         double d = 1;
         double n = 0;
 
-        for( OpenSimplex2D noise : this.noiseOctaves ) {
+        for( OpenSimplex2D noise : noiseOctaves ) {
             t += 1 * d;
             n += noise.generate( x / d, y / d ) * d;
             d *= 2;
@@ -100,8 +100,8 @@ public class InverseFractalOpenSimplex2D extends Noise2D {
     @Override
     public void setSeed( int seed ) {
         this.seed = seed;
-        for( OpenSimplex2D noise : this.noiseOctaves ) {
-            noise.setSeed( this.seed );
+        for( OpenSimplex2D noise : noiseOctaves ) {
+            noise.setSeed( seed++ );
         }
     }
 }

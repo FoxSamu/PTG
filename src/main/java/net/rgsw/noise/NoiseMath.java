@@ -12,7 +12,10 @@ package net.rgsw.noise;
 /**
  * Helper class for basic mathematical operations used during noise generation.
  */
-public class NoiseMath {
+final class NoiseMath {
+
+    private NoiseMath() {
+    }
 
     /**
      * Interpolates value between 0 and 1 to value between a and b using linear interpolation

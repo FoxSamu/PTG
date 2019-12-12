@@ -74,9 +74,6 @@ public abstract class Noise3D implements INoise3D {
         this.seed = seed;
     }
 
-    @Override
-    public abstract double generate( double x, double y, double z );
-
     /**
      * Generates a noise and multiplies it by a specific amount.
      *

@@ -45,17 +45,29 @@ public class Perlin2D extends Noise2D {
     }
 
     private static final int[][] GRAD = {
-        { - 1, - 1 }, { - 1, 1 }, { 1, - 1 }, { 1, 1 },
-        { - 1, - 1 }, { - 1, 1 }, { 1, - 1 }, { 1, 1 },
-        { - 1, 0 }, { - 1, 0 }, { 1, 0 }, { 1, 0 },
-        { 0, - 1 }, { 0, 1 }, { 0, - 1 }, { 0, 1 }
+        { - 1, - 1 },
+        { - 1, 1 },
+        { 1, - 1 },
+        { 1, 1 },
+        { - 1, - 1 },
+        { - 1, 1 },
+        { 1, - 1 },
+        { 1, 1 },
+        { - 1, 0 },
+        { - 1, 0 },
+        { 1, 0 },
+        { 1, 0 },
+        { 0, - 1 },
+        { 0, 1 },
+        { 0, - 1 },
+        { 0, 1 }
     };
 
     private int gradIndex( int x, int y ) {
-        return Hash.hash2I( this.seed, x, y ) & 15;
+        return Hash.hash2I( seed, x, y ) & 15;
     }
 
-    private double lerp( double a, double b, double x ) {
+    private static double lerp( double a, double b, double x ) {
         return a + x * ( b - a );
     }
 
@@ -70,8 +82,8 @@ public class Perlin2D extends Noise2D {
 
     @Override
     public double generate( double x, double y ) {
-        x /= this.scaleX;
-        y /= this.scaleY;
+        x /= scaleX;
+        y /= scaleY;
 
         int minx = fastfloor( x );
         int miny = fastfloor( y );
@@ -82,10 +94,10 @@ public class Perlin2D extends Noise2D {
         double smoothy = smooth( y - miny );
 
 
-        int idx1 = this.gradIndex( minx, miny );
-        int idx2 = this.gradIndex( maxx, miny );
-        int idx3 = this.gradIndex( minx, maxy );
-        int idx4 = this.gradIndex( maxx, maxy );
+        int idx1 = gradIndex( minx, miny );
+        int idx2 = gradIndex( maxx, miny );
+        int idx3 = gradIndex( minx, maxy );
+        int idx4 = gradIndex( maxx, maxy );
 
         int[] grad1 = GRAD[ idx1 ];
         int[] grad2 = GRAD[ idx2 ];
@@ -106,9 +118,9 @@ public class Perlin2D extends Noise2D {
         double dot3 = dist30 * grad3[ 0 ] + dist31 * grad3[ 1 ];
         double dot4 = dist40 * grad4[ 0 ] + dist41 * grad4[ 1 ];
 
-        double lerp12 = this.lerp( dot1, dot2, smoothx );
-        double lerp34 = this.lerp( dot3, dot4, smoothx );
+        double lerp12 = lerp( dot1, dot2, smoothx );
+        double lerp34 = lerp( dot3, dot4, smoothx );
 
-        return this.lerp( lerp12, lerp34, smoothy );
+        return lerp( lerp12, lerp34, smoothy );
     }
 }

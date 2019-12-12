@@ -53,9 +53,6 @@ public abstract class Noise2D implements INoise2D {
         this.scaleY = scaleY;
     }
 
-    @Override
-    public abstract double generate( double x, double y );
-
     /**
      * Generates a noise and multiplies it by a specific amount.
      *

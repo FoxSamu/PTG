@@ -10,15 +10,15 @@
 package net.rgsw.noise;
 
 /**
- * Fractal-Perlin noise generator for 2D space. This generator uses a specified amount of {@link Perlin2D}-instances as
- * octaves.
+ * Inverse-Fractal-Perlin noise generator for 2D space. This generator uses a specified amount of {@link
+ * Perlin2D}-instances as octaves.
  */
 public class InverseFractalPerlin2D extends Noise2D {
 
     private final Perlin2D[] noiseOctaves;
 
     /**
-     * Constructs a Fractal-Perlin noise generator.
+     * Constructs a Inverse-Fractal-Perlin noise generator.
      *
      * @param seed    The seed, may be any {@code int}.
      * @param octaves The amount of octaves.
@@ -30,15 +30,15 @@ public class InverseFractalPerlin2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new Perlin2D[ octaves ];
+        noiseOctaves = new Perlin2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new Perlin2D( seed );
+            noiseOctaves[ i ] = new Perlin2D( seed );
         }
     }
 
     /**
-     * Constructs a Fractal-Perlin noise generator.
+     * Constructs a Inverse-Fractal-Perlin noise generator.
      *
      * @param seed    The seed, may be any {@code int}.
      * @param scale   The coordinate scaling along every axis.
@@ -51,15 +51,15 @@ public class InverseFractalPerlin2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new Perlin2D[ octaves ];
+        noiseOctaves = new Perlin2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new Perlin2D( seed );
+            noiseOctaves[ i ] = new Perlin2D( seed );
         }
     }
 
     /**
-     * Constructs a Fractal-Perlin noise generator.
+     * Constructs a Inverse-Fractal-Perlin noise generator.
      *
      * @param seed    The seed, may be any {@code int}.
      * @param scaleX  The coordinate scaling along X axis.
@@ -73,23 +73,23 @@ public class InverseFractalPerlin2D extends Noise2D {
             throw new IllegalArgumentException( "There should be at least one octave." );
         }
 
-        this.noiseOctaves = new Perlin2D[ octaves ];
+        noiseOctaves = new Perlin2D[ octaves ];
 
         for( int i = 0; i < octaves; i++ ) {
-            this.noiseOctaves[ i ] = new Perlin2D( seed );
+            noiseOctaves[ i ] = new Perlin2D( seed );
         }
     }
 
     @Override
     public double generate( double x, double y ) {
-        x /= this.scaleX;
-        y /= this.scaleY;
+        x /= scaleX;
+        y /= scaleY;
 
         double t = 0;
         double d = 1;
         double n = 0;
 
-        for( Perlin2D noise : this.noiseOctaves ) {
+        for( Perlin2D noise : noiseOctaves ) {
             t += 1 * d;
             n += noise.generate( x / d, y / d ) * d;
             d *= 2;
@@ -100,8 +100,8 @@ public class InverseFractalPerlin2D extends Noise2D {
     @Override
     public void setSeed( int seed ) {
         this.seed = seed;
-        for( Perlin2D perlin : this.noiseOctaves ) {
-            perlin.setSeed( this.seed );
+        for( Perlin2D perlin : noiseOctaves ) {
+            perlin.setSeed( seed++ );
         }
     }
 }
