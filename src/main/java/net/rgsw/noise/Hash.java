@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 RGSW
+ * Copyright (c) 2020 RGSW
  * Licensed under Apache 2.0 license
  */
 
@@ -196,5 +196,26 @@ public final class Hash {
         hash = hash >> 13 ^ hash;
 
         return hash;
+    }
+
+    // Double precision hash functions
+    public static int hash1I( int seed, long x ) {
+        return 31 * hash1I( seed, (int) ( x & 0xFFFFFFFFL ) )
+                   + hash1I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ) );
+    }
+
+    public static int hash2I( int seed, long x, long y ) {
+        return 31 * hash2I( seed, (int) ( x & 0xFFFFFFFFL ), (int) ( y & 0xFFFFFFFFL ) )
+                   + hash2I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ), (int) ( y >>> 32 & 0xFFFFFFFFL ) );
+    }
+
+    public static int hash3I( int seed, long x, long y, long z ) {
+        return 31 * hash3I( seed, (int) ( x & 0xFFFFFFFFL ), (int) ( y & 0xFFFFFFFFL ), (int) ( z & 0xFFFFFFFFL ) )
+                   + hash3I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ), (int) ( y >>> 32 & 0xFFFFFFFFL ), (int) ( z >>> 32 & 0xFFFFFFFFL ) );
+    }
+
+    public static int hash4I( int seed, long x, long y, long z, long w ) {
+        return 31 * hash4I( seed, (int) ( x & 0xFFFFFFFFL ), (int) ( y & 0xFFFFFFFFL ), (int) ( z & 0xFFFFFFFFL ), (int) ( w & 0xFFFFFFFFL ) )
+                   + hash4I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ), (int) ( y >>> 32 & 0xFFFFFFFFL ), (int) ( z >>> 32 & 0xFFFFFFFFL ), (int) ( w >>> 32 & 0xFFFFFFFFL ) );
     }
 }

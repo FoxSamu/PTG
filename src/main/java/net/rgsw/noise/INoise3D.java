@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 RGSW
+ * Copyright (c) 2020 RGSW
  * Licensed under Apache 2.0 license
  */
 
@@ -261,6 +261,6 @@ public interface INoise3D {
      * @return The created noise generator
      */
     static INoise3D random( int seed ) {
-        return ( x, y, z ) -> Hash.hash3D( seed, (int) x, (int) y, (int) z ) * 2 - 1;
+        return ( x, y, z ) -> Hash.hash3D( seed, Hash.hash1I( seed, Double.doubleToLongBits( x ) ), Hash.hash1I( seed, Double.doubleToLongBits( y ) ), Hash.hash1I( seed, Double.doubleToLongBits( z ) ) ) * 2 - 1;
     }
 }

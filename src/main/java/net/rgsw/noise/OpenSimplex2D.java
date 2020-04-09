@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 RGSW
+ * Copyright (c) 2020 RGSW
  * Licensed under Apache 2.0 license
  */
 
@@ -56,12 +56,12 @@ public class OpenSimplex2D extends Noise2D {
     }
 
 
-    private double extrapolate( int xsb, int ysb, double dx, double dy ) {
+    private double extrapolate( long xsb, long ysb, double dx, double dy ) {
         int index = Hash.hash2I( seed, xsb, ysb ) & 0x0E;
         return GRAD[ index ] * dx + GRAD[ index + 1 ] * dy;
     }
 
-    private static int fastfloor( double x ) {
+    private static long fastfloor( double x ) {
         int xi = (int) x;
         return x < xi ? xi - 1 : xi;
     }
@@ -78,8 +78,8 @@ public class OpenSimplex2D extends Noise2D {
         double ys = y + stretchOffset;
 
         // Floor to get grid coordinates of rhombus (stretched square) super-cell origin.
-        int xsb = fastfloor( xs );
-        int ysb = fastfloor( ys );
+        long xsb = fastfloor( xs );
+        long ysb = fastfloor( ys );
 
         // Skew out to get actual coordinates of rhombus origin. We'll need these later.
         double squishOffset = ( xsb + ysb ) * SQUISH_CONSTANT_2D;
@@ -100,8 +100,8 @@ public class OpenSimplex2D extends Noise2D {
         // We'll be defining these inside the next block and using them afterwards.
         double dx_ext;
         double dy_ext;
-        int xsv_ext;
-        int ysv_ext;
+        long xsv_ext;
+        long ysv_ext;
 
         double value = 0;
 

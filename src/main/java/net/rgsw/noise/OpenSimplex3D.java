@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 RGSW
+ * Copyright (c) 2020 RGSW
  * Licensed under Apache 2.0 license
  */
 
@@ -73,13 +73,13 @@ public class OpenSimplex3D extends Noise3D {
     }
 
 
-    private double extrapolate( int xsb, int ysb, int zsb, double dx, double dy, double dz ) {
+    private double extrapolate( long xsb, long ysb, long zsb, double dx, double dy, double dz ) {
         int index = Hash.hash3I( seed, xsb, ysb, zsb ) % 24 * 3;
         return GRAD[ index ] * dx + GRAD[ index + 1 ] * dy + GRAD[ index + 2 ] * dz;
     }
 
-    private static int fastfloor( double x ) {
-        int xi = (int) x;
+    private static long fastfloor( double x ) {
+        long xi = (long) x;
         return x < xi ? xi - 1 : xi;
     }
 
@@ -96,9 +96,9 @@ public class OpenSimplex3D extends Noise3D {
         double zs = z + stretchOffset;
 
         // Floor to get simplectic honeycomb coordinates of rhombohedron (stretched cube) super-cell origin.
-        int xsb = fastfloor( xs );
-        int ysb = fastfloor( ys );
-        int zsb = fastfloor( zs );
+        long xsb = fastfloor( xs );
+        long ysb = fastfloor( ys );
+        long zsb = fastfloor( zs );
 
         // Skew out to get actual coordinates of rhombohedron origin. We'll need these later.
         double squishOffset = ( xsb + ysb + zsb ) * SQUISH_CONSTANT_3D;
@@ -126,12 +126,12 @@ public class OpenSimplex3D extends Noise3D {
         double dx_ext1;
         double dy_ext1;
         double dz_ext1;
-        int xsv_ext0;
-        int ysv_ext0;
-        int zsv_ext0;
-        int xsv_ext1;
-        int ysv_ext1;
-        int zsv_ext1;
+        long xsv_ext0;
+        long ysv_ext0;
+        long zsv_ext0;
+        long xsv_ext1;
+        long ysv_ext1;
+        long zsv_ext1;
 
         double value = 0;
         if( inSum <= 1 ) { // We're inside the tetrahedron (3-Simplex) at (0,0,0)

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 RGSW
+ * Copyright (c) 2020 RGSW
  * Licensed under Apache 2.0 license
  */
 
@@ -59,7 +59,7 @@ public class Perlin2D extends Noise2D {
         { 0, 1 }
     };
 
-    private int gradIndex( int x, int y ) {
+    private int gradIndex( long x, long y ) {
         return Hash.hash2I( seed, x, y ) & 15;
     }
 
@@ -71,9 +71,9 @@ public class Perlin2D extends Noise2D {
         return t * t * t * ( t * ( t * 6 - 15 ) + 10 );
     }
 
-    private static int fastfloor( double v ) {
+    private static long fastfloor( double v ) {
         int d = v < 0 ? - 1 : 0;
-        return (int) v + d;
+        return (long) v + d;
     }
 
     @Override
@@ -81,10 +81,10 @@ public class Perlin2D extends Noise2D {
         x /= scaleX;
         y /= scaleY;
 
-        int minx = fastfloor( x );
-        int miny = fastfloor( y );
-        int maxx = minx + 1;
-        int maxy = miny + 1;
+        long minx = fastfloor( x );
+        long miny = fastfloor( y );
+        long maxx = minx + 1L;
+        long maxy = miny + 1L;
 
         double smoothx = smooth( x - minx );
         double smoothy = smooth( y - miny );

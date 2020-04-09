@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019 RGSW
+ * Copyright (c) 2020 RGSW
  * Licensed under Apache 2.0 license
  */
 
@@ -240,6 +240,6 @@ public interface INoise2D {
      * @return The created noise generator
      */
     static INoise2D random( int seed ) {
-        return ( x, y ) -> Hash.hash2D( seed, (int) x, (int) y ) * 2 - 1;
+        return ( x, y ) -> Hash.hash2D( seed, Hash.hash1I( seed, Double.doubleToLongBits( x ) ), Hash.hash1I( seed, Double.doubleToLongBits( y ) ) ) * 2 - 1;
     }
 }
