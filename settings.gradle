@@ -1,6 +1,8 @@
 /*
- * Copyright (c) 2019 RGSW
- * Licensed under Apache 2.0 license
+ * Copyright (c) 2020 RedGalaxy & contributors
+ * All rights reserved. Do not distribute.
+ *
+ * For a full license, see LICENSE.txt
  */
 
 rootProject.name = 'Noise'
