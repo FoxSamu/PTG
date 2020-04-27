@@ -1,8 +1,6 @@
 /*
- * Copyright (c) 2020 RedGalaxy & contributors
- * All rights reserved. Do not distribute.
- *
- * For a full license, see LICENSE.txt
+ * Copyright (c) 2020 RGSW
+ * Licensed under the Apache 2.0 license
  */
 
 package net.rgsw.noise;
