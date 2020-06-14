@@ -26,6 +26,7 @@ task sourceJar(type: Jar) {
 
 
 dependencies {
+    compile group: 'it.unimi.dsi', name: 'fastutil', version: '8.2.1'
 }
 
 publishing {
