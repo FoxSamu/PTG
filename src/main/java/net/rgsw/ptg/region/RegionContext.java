@@ -7,10 +7,8 @@
 
 package net.rgsw.ptg.region;
 
-import net.rgsw.ptg.region.layer.GeneratorLayer;
-import net.rgsw.ptg.region.layer.MergerLayer;
-import net.rgsw.ptg.region.layer.TransformerLayer;
-import net.rgsw.ptg.region.layer.RandomLayer;
+import net.rgsw.ptg.noise.Noise2D;
+import net.rgsw.ptg.region.layer.*;
 
 /**
  * A generic region building context.
@@ -187,6 +185,23 @@ public interface RegionContext<R extends Region> {
         return generate( new RandomLayer( min, max ) );
     }
 
+
+    default RegionBuilder<R, ?> randomF( FloatRandomLayer.RandomFunction func, long seed ) {
+        return generate( new FloatRandomLayer( func ), seed );
+    }
+
+    default RegionBuilder<R, ?> randomF( FloatRandomLayer.RandomFunction func ) {
+        return generate( new FloatRandomLayer( func ) );
+    }
+
+    default RegionBuilder<R, ?> randomF( float min, float max, long seed ) {
+        return generate( new FloatRandomLayer( min, max ), seed );
+    }
+
+    default RegionBuilder<R, ?> randomF( float min, float max ) {
+        return generate( new FloatRandomLayer( min, max ) );
+    }
+
     default RegionBuilder<R, ?> binary( double oneChance, long seed ) {
         return generate( new RandomLayer( oneChance ), seed );
     }
@@ -202,4 +217,21 @@ public interface RegionContext<R extends Region> {
     default RegionBuilder<R, ?> pick( int[] ints ) {
         return generate( new RandomLayer( ints ) );
     }
+
+    default RegionBuilder<R, ?> pickF( float[] floats, long seed ) {
+        return generate( new FloatRandomLayer( floats ), seed );
+    }
+
+    default RegionBuilder<R, ?> pickF( float[] floats ) {
+        return generate( new FloatRandomLayer( floats ) );
+    }
+
+    default RegionBuilder<R, ?> noise( Noise2D noise, long seed ) {
+        return generate( new NoiseLayer( noise ), seed );
+    }
+
+    default RegionBuilder<R, ?> noise( Noise2D noise ) {
+        return generate( new NoiseLayer( noise ) );
+    }
+
 }

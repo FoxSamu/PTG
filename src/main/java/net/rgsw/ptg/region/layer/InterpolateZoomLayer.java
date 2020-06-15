@@ -3,7 +3,26 @@ package net.rgsw.ptg.region.layer;
 import net.rgsw.ptg.region.RegionRNG;
 
 public class InterpolateZoomLayer extends ZoomLayer {
-    public static final InterpolateZoomLayer INSTANCE = new InterpolateZoomLayer();
+    public static final InterpolateZoomLayer INTEGER = new InterpolateZoomLayer();
+    public static final InterpolateZoomLayer FLOAT = new InterpolateZoomLayer() {
+        @Override
+        protected int pickRandom( RegionRNG rng, int a, int b, int c, int d ) {
+            return Float.floatToRawIntBits(
+                ( Float.intBitsToFloat( a )
+                      + Float.intBitsToFloat( b )
+                      + Float.intBitsToFloat( c )
+                      + Float.intBitsToFloat( d ) ) / 4
+            );
+        }
+
+        @Override
+        protected int pickRandom( RegionRNG rng, int a, int b ) {
+            return Float.floatToRawIntBits(
+                ( Float.intBitsToFloat( a )
+                      + Float.intBitsToFloat( b ) ) / 2
+            );
+        }
+    };
 
     protected InterpolateZoomLayer() {
     }

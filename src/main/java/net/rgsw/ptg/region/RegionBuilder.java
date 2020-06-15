@@ -117,7 +117,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @see #zoomInterp()
      */
     default T zoomInterp( int amount ) {
-        return apply( factory -> InterpolateZoomLayer.INSTANCE.magnify( getContext(), nextSeed(), factory, amount ) );
+        return apply( factory -> InterpolateZoomLayer.INTEGER.magnify( getContext(), nextSeed(), factory, amount ) );
     }
 
     /**
@@ -129,7 +129,32 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @see #zoomInterp(int)
      */
     default T zoomInterp() {
-        return apply( factory -> InterpolateZoomLayer.INSTANCE.factory( getContext(), nextSeed(), factory ) );
+        return apply( factory -> InterpolateZoomLayer.INTEGER.factory( getContext(), nextSeed(), factory ) );
+    }
+
+    /**
+     * Applies multiple {@linkplain InterpolateZoomLayer interpolating zoom layers} to the underlying {@link
+     * RegionFactory} chain, considering floating point representations instead of integers.
+     *
+     * @param amount The amount of zoom layers to add
+     * @return This instance for chaining
+     *
+     * @see #zoomInterpF()
+     */
+    default T zoomInterpF( int amount ) {
+        return apply( factory -> InterpolateZoomLayer.FLOAT.magnify( getContext(), nextSeed(), factory, amount ) );
+    }
+
+    /**
+     * Applies a {@linkplain InterpolateZoomLayer interpolating zoom layer} to the underlying {@link RegionFactory}
+     * chain, considering floating point representations instead of integers.
+     *
+     * @return This instance for chaining
+     *
+     * @see #zoomInterpF(int)
+     */
+    default T zoomInterpF() {
+        return apply( factory -> InterpolateZoomLayer.FLOAT.factory( getContext(), nextSeed(), factory ) );
     }
 
     /**
@@ -151,6 +176,60 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
     }
 
     /**
+     * Applies a {@linkplain PackFloatLayer float packing layer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T packFP( int precision, float min, float max ) {
+        return apply( factory -> new PackFloatLayer( precision, min, max ).factory( getContext(), nextSeed(), factory ) );
+    }
+
+    /**
+     * Applies a {@linkplain PackFloatLayer float packing layer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T packFP( int precision ) {
+        return apply( factory -> new PackFloatLayer( precision, 0, 1 ).factory( getContext(), nextSeed(), factory ) );
+    }
+
+    /**
+     * Applies a {@linkplain UnpackFloatLayer float unpacking layer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T unpackFP( int precision, float min, float max ) {
+        return apply( factory -> new UnpackFloatLayer( precision, min, max ).factory( getContext(), nextSeed(), factory ) );
+    }
+
+    /**
+     * Applies a {@linkplain UnpackFloatLayer float unpacking layer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T unpackFP( int precision ) {
+        return apply( factory -> new UnpackFloatLayer( precision, 0, 1 ).factory( getContext(), nextSeed(), factory ) );
+    }
+
+    /**
+     * Applies an {@link ArithmeticTransformerLayer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T arithmetic( ArithmeticTransformerLayer layer ) {
+        return transform( layer );
+    }
+
+    /**
+     * Applies a {@link FloatArithmeticTransformerLayer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T arithmeticF( FloatArithmeticTransformerLayer layer ) {
+        return transform( layer );
+    }
+
+    /**
      * Applies a {@linkplain TransformerLayer transformer layer} to the underlying {@link RegionFactory} chain.
      *
      * @param layer The {@link TransformerLayer} to apply.
@@ -158,6 +237,26 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      */
     default T transform( TransformerLayer layer ) {
         return apply( factory -> layer.factory( getContext(), nextSeed(), factory ) );
+    }
+
+    /**
+     * Applies an {@link ArithmeticMergerLayer} to the underlying {@link RegionFactory} chain, using the specified
+     * {@link RegionFactory} as second chain.
+     *
+     * @return This instance for chaining
+     */
+    default T arithmetic( ArithmeticMergerLayer layer, RegionFactory<R> otherFactory ) {
+        return merge( layer, otherFactory );
+    }
+
+    /**
+     * Applies a {@link FloatArithmeticMergerLayer} to the underlying {@link RegionFactory} chain, using the specified
+     * {@link RegionFactory} as second chain.
+     *
+     * @return This instance for chaining
+     */
+    default T arithmeticF( FloatArithmeticMergerLayer layer, RegionFactory<R> otherFactory ) {
+        return merge( layer, otherFactory );
     }
 
     /**

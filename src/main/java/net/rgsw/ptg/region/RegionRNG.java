@@ -49,6 +49,15 @@ public interface RegionRNG {
     }
 
     /**
+     * Generates a pseudorandom float between 0 and 1.
+     *
+     * @return The generated float.
+     */
+    default float randomFloat() {
+        return random( Integer.MAX_VALUE ) / (float) Integer.MAX_VALUE;
+    }
+
+    /**
      * Recomputes the seed of this RNG from the specified coordinates using {@link #setPosition} and returns this
      * instance for convenience.
      *
@@ -72,6 +81,18 @@ public interface RegionRNG {
     }
 
     /**
+     * Chooses pseudorandomly between two floats. This does not compute the next seed if the two values are equal.
+     *
+     * @param a Value A
+     * @param b Value B
+     * @return A or B
+     */
+    default float pickRandom( float a, float b ) {
+        if( a == b ) return a;
+        return randomBool() ? a : b;
+    }
+
+    /**
      * Picks pseudorandomly from four integers. This does not compute the next seed if all values are equal.
      *
      * @param a Value A
@@ -90,6 +111,24 @@ public interface RegionRNG {
     }
 
     /**
+     * Picks pseudorandomly from four floats. This does not compute the next seed if all values are equal.
+     *
+     * @param a Value A
+     * @param b Value B
+     * @param c Value C
+     * @param d Value D
+     * @return A, B, C or D
+     */
+    default float pickRandom( float a, float b, float c, float d ) {
+        if( a == b && a == c && a == d ) return a;
+        int rand = random( 4 );
+        if( rand == 0 ) return a;
+        if( rand == 1 ) return b;
+        if( rand == 2 ) return c;
+        return d;
+    }
+
+    /**
      * Picks pseudorandomly from a set of integers.
      *
      * @param ints The integer array/varargs to pick from.
@@ -97,5 +136,15 @@ public interface RegionRNG {
      */
     default int pickRandom( int... ints ) {
         return ints[ random( ints.length ) ];
+    }
+
+    /**
+     * Picks pseudorandomly from a set of floats.
+     *
+     * @param floats The float array/varargs to pick from.
+     * @return The picked float
+     */
+    default float pickRandom( float... floats ) {
+        return floats[ random( floats.length ) ];
     }
 }
