@@ -108,6 +108,31 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
     }
 
     /**
+     * Applies multiple {@linkplain InterpolateZoomLayer interpolating zoom layers} to the underlying {@link
+     * RegionFactory} chain.
+     *
+     * @param amount The amount of zoom layers to add
+     * @return This instance for chaining
+     *
+     * @see #zoomInterp()
+     */
+    default T zoomInterp( int amount ) {
+        return apply( factory -> InterpolateZoomLayer.INSTANCE.magnify( getContext(), nextSeed(), factory, amount ) );
+    }
+
+    /**
+     * Applies a {@linkplain InterpolateZoomLayer interpolating zoom layer} to the underlying {@link RegionFactory}
+     * chain.
+     *
+     * @return This instance for chaining
+     *
+     * @see #zoomInterp(int)
+     */
+    default T zoomInterp() {
+        return apply( factory -> InterpolateZoomLayer.INSTANCE.factory( getContext(), nextSeed(), factory ) );
+    }
+
+    /**
      * Applies a {@linkplain SmoothingLayer smoothing layer} to the underlying {@link RegionFactory} chain.
      *
      * @return This instance for chaining

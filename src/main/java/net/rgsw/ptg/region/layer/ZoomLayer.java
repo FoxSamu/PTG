@@ -41,19 +41,23 @@ public class ZoomLayer implements TransformerLayer {
         // *
         // +   +
         int v01 = region.getValue( lx, lz + 1 );
-        if( sx == 0 ) return rng.pickRandom( v00, v01 );
+        if( sx == 0 ) return pickRandom( rng, v00, v01 );
 
         // +   +
         //
         // + * +
         int v10 = region.getValue( lx + 1, lz );
-        if( sz == 0 ) return rng.pickRandom( v00, v10 );
+        if( sz == 0 ) return pickRandom( rng, v00, v10 );
 
         // +   +
         //   *
         // +   +
         int v11 = region.getValue( lx + 1, lz + 1 );
         return pickRandom( rng, v00, v01, v10, v11 );
+    }
+
+    protected int pickRandom( RegionRNG rng, int a, int b ) {
+        return rng.pickRandom( a, b );
     }
 
     protected int pickRandom( RegionRNG rng, int v00, int v01, int v10, int v11 ) {

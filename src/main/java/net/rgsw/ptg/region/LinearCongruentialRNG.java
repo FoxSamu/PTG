@@ -14,7 +14,7 @@ import net.rgsw.ptg.rng.LongScrambler;
  */
 public class LinearCongruentialRNG implements RegionRNG {
 
-    private static final LongScrambler SCRAMBLER = LongScrambler.xorshift( 13, - 17, 5, - 23, 19, - 27, 7, - 19 );
+    private static final LongScrambler CONSTR_SCRAMBLE = LongScrambler.xorshift( 13, - 17, 5, - 23, 19, - 27, 7, - 19 );
 
     /**
      * The global seed. This seed is based on the world seed and is the same for all instances used in the same world.
@@ -36,7 +36,7 @@ public class LinearCongruentialRNG implements RegionRNG {
     private long currentSeed;
 
     public LinearCongruentialRNG( long worldSeed, long seed ) {
-        seed = SCRAMBLER.scramble( seed );
+        seed = CONSTR_SCRAMBLE.scramble( seed );
         initWorldSeed( worldSeed );
         initLocalSeed( seed );
     }
