@@ -241,4 +241,12 @@ public interface RegionContext<R extends Region> {
     default RegionBuilder<R, ?> valueF( float val ) {
         return generate( new StaticValueLayer( val ) );
     }
+
+    default RegionBuilder<R, ?> value( int val, long seed ) {
+        return generate( new StaticValueLayer( val ) );
+    }
+
+    default RegionBuilder<R, ?> valueF( float val, long seed ) {
+        return generate( new StaticValueLayer( val ) );
+    }
 }
