@@ -234,4 +234,11 @@ public interface RegionContext<R extends Region> {
         return generate( new NoiseLayer( noise ) );
     }
 
+    default RegionBuilder<R, ?> value( int val ) {
+        return generate( new StaticValueLayer( val ) );
+    }
+
+    default RegionBuilder<R, ?> valueF( float val ) {
+        return generate( new StaticValueLayer( val ) );
+    }
 }
