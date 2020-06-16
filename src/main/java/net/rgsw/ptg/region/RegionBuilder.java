@@ -8,6 +8,8 @@
 package net.rgsw.ptg.region;
 
 import net.rgsw.ptg.region.layer.*;
+import net.rgsw.ptg.region.util.FloatSelector;
+import net.rgsw.ptg.region.util.IntSelector;
 
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -212,6 +214,42 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
     }
 
     /**
+     * Applies a {@link ReplaceLayer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T replace( IntSelector sel, int value ) {
+        return transform( new ReplaceLayer( sel, value ) );
+    }
+
+    /**
+     * Applies a {@link ReplaceLayer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T replace( int sel, int value ) {
+        return transform( new ReplaceLayer( sel, value ) );
+    }
+
+    /**
+     * Applies a {@link ReplaceLayer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T replaceF( FloatSelector sel, float value ) {
+        return transform( new ReplaceLayer( sel, value ) );
+    }
+
+    /**
+     * Applies a {@link ReplaceLayer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T replaceF( float sel, float value ) {
+        return transform( new ReplaceLayer( sel, value ) );
+    }
+
+    /**
      * Applies an {@link ArithmeticTransformerLayer} to the underlying {@link RegionFactory} chain.
      *
      * @return This instance for chaining
@@ -237,6 +275,46 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      */
     default T transform( TransformerLayer layer ) {
         return apply( factory -> layer.factory( getContext(), nextSeed(), factory ) );
+    }
+
+    /**
+     * Applies a {@link ReplaceMergeLayer} to the underlying {@link RegionFactory} chain, using the specified {@link
+     * RegionFactory} as second chain.
+     *
+     * @return This instance for chaining
+     */
+    default T replace( IntSelector sel, RegionFactory<R> other ) {
+        return merge( new ReplaceMergeLayer( sel ), other );
+    }
+
+    /**
+     * Applies a {@link ReplaceMergeLayer} to the underlying {@link RegionFactory} chain, using the specified {@link
+     * RegionFactory} as second chain.
+     *
+     * @return This instance for chaining
+     */
+    default T replace( int sel, RegionFactory<R> other ) {
+        return merge( new ReplaceMergeLayer( sel ), other );
+    }
+
+    /**
+     * Applies a {@link ReplaceMergeLayer} to the underlying {@link RegionFactory} chain, using the specified {@link
+     * RegionFactory} as second chain.
+     *
+     * @return This instance for chaining
+     */
+    default T replaceF( FloatSelector sel, RegionFactory<R> other ) {
+        return merge( new ReplaceMergeLayer( sel ), other );
+    }
+
+    /**
+     * Applies a {@link ReplaceMergeLayer} to the underlying {@link RegionFactory} chain, using the specified {@link
+     * RegionFactory} as second chain.
+     *
+     * @return This instance for chaining
+     */
+    default T replaceF( float sel, RegionFactory<R> other ) {
+        return merge( new ReplaceMergeLayer( sel ), other );
     }
 
     /**

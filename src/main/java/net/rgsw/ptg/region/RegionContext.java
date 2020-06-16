@@ -214,7 +214,7 @@ public interface RegionContext<R extends Region> {
         return generate( new RandomLayer( ints ), seed );
     }
 
-    default RegionBuilder<R, ?> pick( int[] ints ) {
+    default RegionBuilder<R, ?> pick( int... ints ) {
         return generate( new RandomLayer( ints ) );
     }
 
@@ -222,7 +222,7 @@ public interface RegionContext<R extends Region> {
         return generate( new FloatRandomLayer( floats ), seed );
     }
 
-    default RegionBuilder<R, ?> pickF( float[] floats ) {
+    default RegionBuilder<R, ?> pickF( float... floats ) {
         return generate( new FloatRandomLayer( floats ) );
     }
 
