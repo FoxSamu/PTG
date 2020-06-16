@@ -218,4 +218,20 @@ public final class Hash {
         return 31 * hash4I( seed, (int) ( x & 0xFFFFFFFFL ), (int) ( y & 0xFFFFFFFFL ), (int) ( z & 0xFFFFFFFFL ), (int) ( w & 0xFFFFFFFFL ) )
                    + hash4I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ), (int) ( y >>> 32 & 0xFFFFFFFFL ), (int) ( z >>> 32 & 0xFFFFFFFFL ), (int) ( w >>> 32 & 0xFFFFFFFFL ) );
     }
+
+    public static double hash1D( int seed, long x ) {
+        return (double) ( hash1I( seed, x ) & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+    }
+
+    public static double hash2D( int seed, long x, long y ) {
+        return (double) ( hash2I( seed, x, y ) & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+    }
+
+    public static double hash3D( int seed, long x, long y, long z ) {
+        return (double) ( hash3I( seed, x, y, z ) & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+    }
+
+    public static double hash4D( int seed, long x, long y, long z, long w ) {
+        return (double) ( hash4I( seed, x, y, z, w ) & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+    }
 }

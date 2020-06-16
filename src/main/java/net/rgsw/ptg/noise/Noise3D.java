@@ -265,6 +265,6 @@ public interface Noise3D {
      * @return The created noise generator
      */
     static Noise3D random( int seed ) {
-        return ( x, y, z ) -> Hash.hash3D( seed, Hash.hash1I( seed, Double.doubleToLongBits( x ) ), Hash.hash1I( seed, Double.doubleToLongBits( y ) ), Hash.hash1I( seed, Double.doubleToLongBits( z ) ) ) * 2 - 1;
+        return ( x, y, z ) -> Hash.hash3D( seed, NoiseMath.floor( x ), NoiseMath.floor( y ), NoiseMath.floor( z ) ) * 2 - 1;
     }
 }

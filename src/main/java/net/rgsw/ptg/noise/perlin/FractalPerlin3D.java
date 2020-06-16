@@ -85,16 +85,14 @@ public class FractalPerlin3D extends BaseNoise3D {
         y /= scaleY;
         z /= scaleZ;
 
-        double t = 0;
         double d = 1;
         double n = 0;
 
         for( Perlin3D noise : noiseOctaves ) {
-            t += 1 / d;
             n += noise.generate( x * d, y * d, z * d ) / d;
             d *= 2;
         }
-        return n / t;
+        return n;
     }
 
     @Override

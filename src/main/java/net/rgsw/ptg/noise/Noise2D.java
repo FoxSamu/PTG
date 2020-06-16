@@ -244,6 +244,6 @@ public interface Noise2D {
      * @return The created noise generator
      */
     static Noise2D random( int seed ) {
-        return ( x, y ) -> Hash.hash2D( seed, Hash.hash1I( seed, Double.doubleToLongBits( x ) ), Hash.hash1I( seed, Double.doubleToLongBits( y ) ) ) * 2 - 1;
+        return ( x, y ) -> Hash.hash2D( seed, NoiseMath.floor( x ), NoiseMath.floor( y ) ) * 2 - 1;
     }
 }

@@ -93,7 +93,7 @@ public class InverseFractalOpenSimplex3D extends BaseNoise3D {
             n += noise.generate( x / d, y / d, z / d ) * d;
             d *= 2;
         }
-        return NoiseMath.clamp( - 1, 1, n );
+        return n;
     }
 
     @Override
