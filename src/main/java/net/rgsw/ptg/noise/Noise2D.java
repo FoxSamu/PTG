@@ -8,6 +8,7 @@ package net.rgsw.ptg.noise;
 import net.rgsw.ptg.noise.util.DoubleFunction;
 import net.rgsw.ptg.noise.util.Hash;
 import net.rgsw.ptg.noise.util.NoiseMath;
+import net.rgsw.ptg.region.Region;
 
 /**
  * Generic interface of a noise generator for 2D space.
@@ -245,5 +246,16 @@ public interface Noise2D {
      */
     static Noise2D random( int seed ) {
         return ( x, y ) -> Hash.hash2D( seed, NoiseMath.floor( x ), NoiseMath.floor( y ) ) * 2 - 1;
+    }
+
+
+    /**
+     * Creates a {@link Region}-based cell noise generator. Uses {@link Region#getFPValue}.
+     *
+     * @param region The region to generate with
+     * @return The created noise generator
+     */
+    static Noise2D region( Region region ) {
+        return ( x, y ) -> region.getFPValue( NoiseMath.floorI( x ), NoiseMath.floorI( y ) );
     }
 }

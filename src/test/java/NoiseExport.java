@@ -7,12 +7,14 @@ import net.rgsw.ptg.noise.perlin.InverseFractalPerlin2D;
 import net.rgsw.ptg.noise.perlin.Perlin2D;
 import net.rgsw.ptg.noise.perlin.RepetitivePerlin2D;
 import net.rgsw.ptg.noise.util.NoiseMath;
+import net.rgsw.ptg.region.CachingRegionContext;
+import net.rgsw.ptg.region.Region;
+import net.rgsw.ptg.region.RegionContext;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.Random;
 
 public final class NoiseExport {
     private NoiseExport() {
@@ -28,6 +30,10 @@ public final class NoiseExport {
         exportNoise( new File( "exports/inversefractalopensimplex.png" ), 256, 256, new InverseFractalOpenSimplex2D( seed, 8 ), 16 );
         exportNoise( new File( "exports/repetitiveperlin.png" ), 256, 256, new RepetitivePerlin2D( seed, 8 ), 16 );
         exportNoise( new File( "exports/random.png" ), 256, 256, Noise2D.random( seed ), 16 );
+
+        RegionContext<?> ctx = new CachingRegionContext( 25, 55122121599L );
+        Region reg = ctx.randomF( - 1, 1, 3417L ).zoomFuzzy( 2 ).zoom( 3 ).smooth().buildRegion();
+        exportNoise( new File( "exports/region.png" ), 256, 256, Noise2D.region( reg ), 1 );
     }
 
     public static void exportNoise( File file, int width, int height, Noise2D noise, double scale ) {

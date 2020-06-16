@@ -67,6 +67,6 @@ public class CachingRegion implements Region {
     }
 
     private long asLong( int x, int z ) {
-        return (long) x << 32 & z;
+        return (long) x << 32 | z;
     }
 }

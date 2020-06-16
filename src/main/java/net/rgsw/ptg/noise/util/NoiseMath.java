@@ -61,4 +61,9 @@ public final class NoiseMath {
         return v < 0 ? lv - 1 : lv;
     }
 
+    public static int floorI( double v ) {
+        int lv = (int) v;
+        return v < 0 ? lv - 1 : lv;
+    }
+
 }
