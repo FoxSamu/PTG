@@ -42,11 +42,11 @@ publishing {
     }
     repositories {
         maven {
-            name = "GitHubPackages"
-            url = uri( "https://maven.pkg.github.com/RedGalaxySW/Noise" )
+            name = "ModMaven"
+            url = uri( "https://modmaven.k-4u.nl/artifactory/local-releases" )
             credentials {
-                username = gprUser.toLowerCase()
-                password = gprKey.toLowerCase()
+                username = mmUser
+                password = mmKey
             }
         }
     }
