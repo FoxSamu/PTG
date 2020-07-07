@@ -1,17 +1,22 @@
-import net.rgsw.ptg.noise.Noise2D;
-import net.rgsw.ptg.noise.opensimplex.FractalOpenSimplex2D;
-import net.rgsw.ptg.noise.opensimplex.InverseFractalOpenSimplex2D;
-import net.rgsw.ptg.noise.opensimplex.OpenSimplex2D;
-import net.rgsw.ptg.noise.perlin.FractalPerlin2D;
-import net.rgsw.ptg.noise.perlin.InverseFractalPerlin2D;
-import net.rgsw.ptg.noise.perlin.Perlin2D;
-import net.rgsw.ptg.noise.perlin.RepetitivePerlin2D;
-import net.rgsw.ptg.noise.util.NoiseMath;
-import net.rgsw.ptg.region.CachingRegionContext;
-import net.rgsw.ptg.region.Region;
-import net.rgsw.ptg.region.RegionBuilder;
-import net.rgsw.ptg.region.RegionContext;
-import net.rgsw.ptg.region.layer.*;
+/*
+ * Copyright (c) 2020 RGSW
+ * Licensed under Apache 2.0 license
+ */
+
+import net.shadew.ptg.noise.Noise2D;
+import net.shadew.ptg.noise.opensimplex.FractalOpenSimplex2D;
+import net.shadew.ptg.noise.opensimplex.InverseFractalOpenSimplex2D;
+import net.shadew.ptg.noise.opensimplex.OpenSimplex2D;
+import net.shadew.ptg.noise.perlin.FractalPerlin2D;
+import net.shadew.ptg.noise.perlin.InverseFractalPerlin2D;
+import net.shadew.ptg.noise.perlin.Perlin2D;
+import net.shadew.ptg.noise.perlin.RepetitivePerlin2D;
+import net.shadew.ptg.noise.util.NoiseMath;
+import net.shadew.ptg.region.CachingRegionContext;
+import net.shadew.ptg.region.Region;
+import net.shadew.ptg.region.RegionBuilder;
+import net.shadew.ptg.region.RegionContext;
+import net.shadew.ptg.region.layer.*;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

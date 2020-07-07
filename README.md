@@ -17,7 +17,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.rgsw:noise:1.0.4'
+    compile 'net.shadew:noise:1.0.4'
 }
 ```
 The latest version depends on the Fastutil library, version 8.2.1. This dependency is automatically included with the PTG library.
