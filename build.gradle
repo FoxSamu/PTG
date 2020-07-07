@@ -1,8 +1,6 @@
 /*
- * Copyright (c) 2020 RedGalaxy & contributors
- * All rights reserved. Do not distribute.
- *
- * For a full license, see LICENSE.txt
+ * Copyright (c) 2020 RGSW
+ * Licensed under Apache 2.0 license
  */
 
 plugins {
@@ -10,8 +8,8 @@ plugins {
     id 'maven-publish'
 }
 
-group 'net.rgsw'
-version '1.0.4'
+group 'net.shadew'
+version '1.1.0'
 
 sourceCompatibility = 1.8
 
@@ -33,7 +31,7 @@ publishing {
     publications {
         maven( MavenPublication ) {
             groupId = project.group
-            artifactId = 'noise'
+            artifactId = 'ptg'
             version = project.version
 
             from components.java
