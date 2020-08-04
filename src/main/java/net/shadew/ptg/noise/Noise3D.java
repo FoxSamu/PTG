@@ -237,7 +237,7 @@ public interface Noise3D {
      * @return The created noise generator
      */
     default Noise3D translate( double x, double y, double z ) {
-        return ( x1, y1, z1 ) -> generate( x1 + x, y1 + y, z1 * z );
+        return (x1, y1, z1) -> generate(x1 + x, y1 + y, z1 + z);
     }
 
     /**
