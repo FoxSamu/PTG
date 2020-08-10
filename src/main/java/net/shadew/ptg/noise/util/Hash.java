@@ -25,15 +25,15 @@ public final class Hash {
      * @param x    The x coordinate
      * @return The random double value
      */
-    public static double hash1D( int seed, int x ) {
+    public static double hash1D(int seed, int x) {
         int hash = seed;
-        if( x < 0 ) x = Integer.MAX_VALUE + x;
+        if(x < 0) x = Integer.MAX_VALUE + x;
         hash ^= X_PRIME * x;
 
         hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
-        return (double) ( hash & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+        return (double) (hash & Integer.MAX_VALUE) / Integer.MAX_VALUE;
     }
 
     /**
@@ -44,17 +44,17 @@ public final class Hash {
      * @param y    The y coordinate
      * @return The random double value
      */
-    public static double hash2D( int seed, int x, int y ) {
+    public static double hash2D(int seed, int x, int y) {
         int hash = seed;
-        if( x < 0 ) x = Integer.MAX_VALUE + x;
-        if( y < 0 ) y = Integer.MAX_VALUE + y;
+        if(x < 0) x = Integer.MAX_VALUE + x;
+        if(y < 0) y = Integer.MAX_VALUE + y;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
 
         hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
-        return (double) ( hash & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+        return (double) (hash & Integer.MAX_VALUE) / Integer.MAX_VALUE;
     }
 
     /**
@@ -66,11 +66,11 @@ public final class Hash {
      * @param z    The z coordinate
      * @return The random double value
      */
-    public static double hash3D( int seed, int x, int y, int z ) {
+    public static double hash3D(int seed, int x, int y, int z) {
         int hash = seed;
-        if( x < 0 ) x = Integer.MAX_VALUE + x;
-        if( y < 0 ) y = Integer.MAX_VALUE + y;
-        if( z < 0 ) z = Integer.MAX_VALUE + z;
+        if(x < 0) x = Integer.MAX_VALUE + x;
+        if(y < 0) y = Integer.MAX_VALUE + y;
+        if(z < 0) z = Integer.MAX_VALUE + z;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
@@ -78,7 +78,7 @@ public final class Hash {
         hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
-        return (double) ( hash & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+        return (double) (hash & Integer.MAX_VALUE) / Integer.MAX_VALUE;
     }
 
     /**
@@ -91,12 +91,12 @@ public final class Hash {
      * @param w    The w coordinate
      * @return The random double value
      */
-    public static double hash4D( int seed, int x, int y, int z, int w ) {
+    public static double hash4D(int seed, int x, int y, int z, int w) {
         int hash = seed;
-        if( x < 0 ) x = Integer.MAX_VALUE + x;
-        if( y < 0 ) y = Integer.MAX_VALUE + y;
-        if( z < 0 ) z = Integer.MAX_VALUE + z;
-        if( w < 0 ) w = Integer.MAX_VALUE + w;
+        if(x < 0) x = Integer.MAX_VALUE + x;
+        if(y < 0) y = Integer.MAX_VALUE + y;
+        if(z < 0) z = Integer.MAX_VALUE + z;
+        if(w < 0) w = Integer.MAX_VALUE + w;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
@@ -105,7 +105,7 @@ public final class Hash {
         hash *= hash * hash * 60493;
         hash = hash >> 13 ^ hash;
 
-        return (double) ( hash & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+        return (double) (hash & Integer.MAX_VALUE) / Integer.MAX_VALUE;
     }
 
     /**
@@ -115,9 +115,9 @@ public final class Hash {
      * @param x    The x coordinate
      * @return The random integer value
      */
-    public static int hash1I( int seed, int x ) {
+    public static int hash1I(int seed, int x) {
         int hash = seed;
-        if( x < 0 ) x = Integer.MAX_VALUE + x;
+        if(x < 0) x = Integer.MAX_VALUE + x;
         hash ^= X_PRIME * x;
 
         hash *= hash * hash * 60493;
@@ -134,10 +134,10 @@ public final class Hash {
      * @param y    The y coordinate
      * @return The random integer value
      */
-    public static int hash2I( int seed, int x, int y ) {
+    public static int hash2I(int seed, int x, int y) {
         int hash = seed;
-        if( x < 0 ) x = Integer.MAX_VALUE + x;
-        if( y < 0 ) y = Integer.MAX_VALUE + y;
+        if(x < 0) x = Integer.MAX_VALUE + x;
+        if(y < 0) y = Integer.MAX_VALUE + y;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
 
@@ -156,11 +156,11 @@ public final class Hash {
      * @param z    The z coordinate
      * @return The random integer value
      */
-    public static int hash3I( int seed, int x, int y, int z ) {
+    public static int hash3I(int seed, int x, int y, int z) {
         int hash = seed;
-        if( x < 0 ) x = Integer.MAX_VALUE + x;
-        if( y < 0 ) y = Integer.MAX_VALUE + y;
-        if( z < 0 ) z = Integer.MAX_VALUE + z;
+        if(x < 0) x = Integer.MAX_VALUE + x;
+        if(y < 0) y = Integer.MAX_VALUE + y;
+        if(z < 0) z = Integer.MAX_VALUE + z;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
@@ -181,12 +181,12 @@ public final class Hash {
      * @param w    The w coordinate
      * @return The random integer value
      */
-    public static int hash4I( int seed, int x, int y, int z, int w ) {
+    public static int hash4I(int seed, int x, int y, int z, int w) {
         int hash = seed;
-        if( x < 0 ) x = Integer.MAX_VALUE + x;
-        if( y < 0 ) y = Integer.MAX_VALUE + y;
-        if( z < 0 ) z = Integer.MAX_VALUE + z;
-        if( w < 0 ) w = Integer.MAX_VALUE + w;
+        if(x < 0) x = Integer.MAX_VALUE + x;
+        if(y < 0) y = Integer.MAX_VALUE + y;
+        if(z < 0) z = Integer.MAX_VALUE + z;
+        if(w < 0) w = Integer.MAX_VALUE + w;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
@@ -199,39 +199,39 @@ public final class Hash {
     }
 
     // Double precision hash functions
-    public static int hash1I( int seed, long x ) {
-        return 31 * hash1I( seed, (int) ( x & 0xFFFFFFFFL ) )
-                   + hash1I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ) );
+    public static int hash1I(int seed, long x) {
+        return 31 * hash1I(seed, (int) (x & 0xFFFFFFFFL))
+                   + hash1I(seed * 31 + Y_PRIME, (int) (x >>> 32 & 0xFFFFFFFFL)) & 0x7FFFFFFF;
     }
 
-    public static int hash2I( int seed, long x, long y ) {
-        return 31 * hash2I( seed, (int) ( x & 0xFFFFFFFFL ), (int) ( y & 0xFFFFFFFFL ) )
-                   + hash2I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ), (int) ( y >>> 32 & 0xFFFFFFFFL ) );
+    public static int hash2I(int seed, long x, long y) {
+        return 31 * hash2I(seed, (int) (x & 0xFFFFFFFFL), (int) (y & 0xFFFFFFFFL))
+                   + hash2I(seed * 31 + Y_PRIME, (int) (x >>> 32 & 0xFFFFFFFFL), (int) (y >>> 32 & 0xFFFFFFFFL)) & 0x7FFFFFFF;
     }
 
-    public static int hash3I( int seed, long x, long y, long z ) {
-        return 31 * hash3I( seed, (int) ( x & 0xFFFFFFFFL ), (int) ( y & 0xFFFFFFFFL ), (int) ( z & 0xFFFFFFFFL ) )
-                   + hash3I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ), (int) ( y >>> 32 & 0xFFFFFFFFL ), (int) ( z >>> 32 & 0xFFFFFFFFL ) );
+    public static int hash3I(int seed, long x, long y, long z) {
+        return 31 * hash3I(seed, (int) (x & 0xFFFFFFFFL), (int) (y & 0xFFFFFFFFL), (int) (z & 0xFFFFFFFFL))
+                   + hash3I(seed * 31 + Y_PRIME, (int) (x >>> 32 & 0xFFFFFFFFL), (int) (y >>> 32 & 0xFFFFFFFFL), (int) (z >>> 32 & 0xFFFFFFFFL)) & 0x7FFFFFFF;
     }
 
-    public static int hash4I( int seed, long x, long y, long z, long w ) {
-        return 31 * hash4I( seed, (int) ( x & 0xFFFFFFFFL ), (int) ( y & 0xFFFFFFFFL ), (int) ( z & 0xFFFFFFFFL ), (int) ( w & 0xFFFFFFFFL ) )
-                   + hash4I( seed * 31 + Y_PRIME, (int) ( x >>> 32 & 0xFFFFFFFFL ), (int) ( y >>> 32 & 0xFFFFFFFFL ), (int) ( z >>> 32 & 0xFFFFFFFFL ), (int) ( w >>> 32 & 0xFFFFFFFFL ) );
+    public static int hash4I(int seed, long x, long y, long z, long w) {
+        return 31 * hash4I(seed, (int) (x & 0xFFFFFFFFL), (int) (y & 0xFFFFFFFFL), (int) (z & 0xFFFFFFFFL), (int) (w & 0xFFFFFFFFL))
+                   + hash4I(seed * 31 + Y_PRIME, (int) (x >>> 32 & 0xFFFFFFFFL), (int) (y >>> 32 & 0xFFFFFFFFL), (int) (z >>> 32 & 0xFFFFFFFFL), (int) (w >>> 32 & 0xFFFFFFFFL)) & 0x7FFFFFFF;
     }
 
-    public static double hash1D( int seed, long x ) {
-        return (double) ( hash1I( seed, x ) & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+    public static double hash1D(int seed, long x) {
+        return (double) hash1I(seed, x) / Integer.MAX_VALUE;
     }
 
-    public static double hash2D( int seed, long x, long y ) {
-        return (double) ( hash2I( seed, x, y ) & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+    public static double hash2D(int seed, long x, long y) {
+        return (double) hash2I(seed, x, y) / Integer.MAX_VALUE;
     }
 
-    public static double hash3D( int seed, long x, long y, long z ) {
-        return (double) ( hash3I( seed, x, y, z ) & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+    public static double hash3D(int seed, long x, long y, long z) {
+        return (double) hash3I(seed, x, y, z) / Integer.MAX_VALUE;
     }
 
-    public static double hash4D( int seed, long x, long y, long z, long w ) {
-        return (double) ( hash4I( seed, x, y, z, w ) & Integer.MAX_VALUE ) / Integer.MAX_VALUE;
+    public static double hash4D(int seed, long x, long y, long z, long w) {
+        return (double) hash4I(seed, x, y, z, w) / Integer.MAX_VALUE;
     }
 }

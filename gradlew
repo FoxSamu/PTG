@@ -1,5 +1,10 @@
 #!/usr/bin/env sh
 
+#
+# Copyright (c) 2020 RGSW
+# Licensed under Apache 2.0 license
+#
+
 ##############################################################################
 ##
 ##  Gradle start up script for UN*X
