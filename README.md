@@ -11,13 +11,14 @@ This project introduces utilities for the generation of random terrains. It incl
 For installing via gradle, you need to add the ModMaven repository. I'll soon be adding it to Maven Central.
 ```groovy
 repositories {
+    mavenCentral()
     maven {
         url uri( "https://modmaven.k-4u.nl/" )
     }
 }
 
 dependencies {
-    compile 'net.shadew:noise:1.0.4'
+    compile 'net.shadew:ptg:1.2.1'
 }
 ```
 The latest version depends on the Fastutil library, version 8.2.1. This dependency is automatically included with the PTG library.
