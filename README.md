@@ -13,7 +13,7 @@ For installing via gradle, you need to add the ModMaven repository. I'll soon be
 repositories {
     mavenCentral()
     maven {
-        url uri( "https://modmaven.k-4u.nl/" )
+        url uri( "http://maven.shadew.net/" )
     }
 }
 
