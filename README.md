@@ -1,4 +1,4 @@
-# Noise - A minimal procedural generation library
+# PTG - A minimal procedural generation library
 This project introduces utilities for the generation of random terrains. It includes:
 - Noise generators in 2D and 3D
   - Perlin and OpenSimplex noise
