@@ -266,6 +266,15 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
     }
 
     /**
+     * Applies an {@link OutlineLayer} to the underlying {@link RegionFactory} chain.
+     *
+     * @return This instance for chaining
+     */
+    default T outline() {
+        return transform(OutlineLayer.INSTANCE);
+    }
+
+    /**
      * Applies a {@linkplain TransformerLayer transformer layer} to the underlying {@link RegionFactory} chain.
      *
      * @param layer The {@link TransformerLayer} to apply.

@@ -125,6 +125,8 @@ public final class NoiseExport {
         exportLayerExample("cell_zoom_small", ctx.pick(redGreenBlueYellow).zoom(3), CellZoomLayer.INSTANCE, 128, 1);
         exportFloatLayerExample("interpolate_zoom_small", ctx.pickF(0, 1).zoom(3), InterpolateZoomLayer.FLOAT, 128, 1);
 
+        exportOutlineLayerExample("outline_small", ctx.pick(blackWhite).zoom(2), OutlineLayer.INSTANCE, 128, 1);
+
         exportLayerExample("random", ctx.pick(redGreenBlueYellow), 16, 8);
         exportFloatLayerExample("float_random", ctx.randomF(0, 1), 16, 8);
         exportLayerExample("static", ctx.value(0xFF0000), 16, 8);
@@ -135,6 +137,14 @@ public final class NoiseExport {
     public static void exportLayerExample(String type, RegionBuilder<?, ?> factory, TransformerLayer layer, int size, int px) {
         Region before = factory.buildRegion();
         Region after = factory.transform(layer).buildRegion();
+
+        exportRegion(new File("exports/regions/" + type + "_before.png"), size * px, size * px, before, px);
+        exportRegion(new File("exports/regions/" + type + "_after.png"), size * px, size * px, after, px);
+    }
+
+    public static void exportOutlineLayerExample(String type, RegionBuilder<?, ?> factory, TransformerLayer layer, int size, int px) {
+        Region before = factory.buildRegion();
+        Region after = factory.transform(layer).replace(1, 0xFFFFFF).zoom().buildRegion();
 
         exportRegion(new File("exports/regions/" + type + "_before.png"), size * px, size * px, before, px);
         exportRegion(new File("exports/regions/" + type + "_after.png"), size * px, size * px, after, px);
