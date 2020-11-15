@@ -17,7 +17,7 @@ import java.util.function.Function;
  *
  * @param <R> The fractal type.
  * @param <T> The type of this builder to return in each property setter.
- * @see CachingRegionBuilder
+ * @see LazyRegionBuilder
  */
 public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> extends RegionFactory<R> {
     /**

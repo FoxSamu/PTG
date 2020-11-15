@@ -3,44 +3,44 @@
  * Licensed under Apache 2.0 license
  */
 
-package net.shadew.ptg.noise.perlin;
+package net.shadew.ptg.noise.value;
 
 import net.shadew.ptg.noise.BaseNoise3D;
 import net.shadew.ptg.noise.util.Hash;
 
 /**
- * 3D Perlin noise generator.
+ * 3D Value noise generator.
  */
-public class Perlin3D extends BaseNoise3D {
+public class Value3D extends BaseNoise3D {
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Value noise generator
      *
      * @param seed The seed, may be any {@link int}
      */
-    public Perlin3D(int seed) {
+    public Value3D(int seed) {
         super(seed);
     }
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Value noise generator
      *
      * @param seed  The seed, may be any {@link int}
      * @param scale The coordinate scaling along all axes
      */
-    public Perlin3D(int seed, double scale) {
+    public Value3D(int seed, double scale) {
         super(seed, scale);
     }
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Value noise generator
      *
      * @param seed   The seed, may be any {@link int}
      * @param scaleX The coordinate scaling along X axis
      * @param scaleY The coordinate scaling along Y axis
      * @param scaleZ The coordinate scaling along Z axis
      */
-    public Perlin3D(int seed, double scaleX, double scaleY, double scaleZ) {
+    public Value3D(int seed, double scaleX, double scaleY, double scaleZ) {
         super(seed, scaleX, scaleY, scaleZ);
     }
 
@@ -54,6 +54,6 @@ public class Perlin3D extends BaseNoise3D {
         y /= scaleY;
         z /= scaleZ;
 
-        return Perlin.compute(x, y, z, this::hash);
+        return Value.compute(x, y, z, this::hash);
     }
 }

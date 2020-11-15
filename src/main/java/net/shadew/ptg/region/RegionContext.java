@@ -12,7 +12,7 @@ import net.shadew.ptg.region.layer.*;
  * A generic region building context.
  *
  * @param <R> The region type this context handles.
- * @see CachingRegionContext
+ * @see LazyRegionContext
  */
 public interface RegionContext<R extends Region> {
 

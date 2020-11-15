@@ -10,34 +10,34 @@ import net.shadew.ptg.region.layer.MergerLayer;
 import net.shadew.ptg.region.layer.TransformerLayer;
 
 /**
- * A {@link RegionContext} implementation that uses {@link Region}s that cache their values: {@link CachingRegion}s.
+ * A {@link RegionContext} implementation that uses {@link Region}s that cache their values: {@link LazyRegion}s.
  */
-public class CachingRegionContext implements RegionContext<CachingRegion> {
+public class LazyRegionContext implements RegionContext<LazyRegion> {
     private final int initCacheSize;
     private final int cacheSizeMul;
     private final int cacheLimit;
     private final long worldSeed;
 
     /**
-     * Creates a {@link CachingRegionContext} with default configuration.
+     * Creates a {@link LazyRegionContext} with default configuration.
      *
      * @param initCacheSize The initial cache size used when creating a generator region.
      * @param worldSeed     The world seed.
      */
-    public CachingRegionContext( int initCacheSize, long worldSeed ) {
-        this( initCacheSize, 4, 1024, worldSeed );
+    public LazyRegionContext(int initCacheSize, long worldSeed) {
+        this(initCacheSize, 4, 1024, worldSeed);
     }
 
     /**
-     * Creates a {@link CachingRegionContext} with custom configuration.
+     * Creates a {@link LazyRegionContext} with custom configuration.
      *
      * @param initCacheSize The initial cache size used when creating a generator region.
      * @param cacheSizeMul  The cache size multiplier used when creating a transformer or merger region.
      * @param cacheLimit    The cache size limit. Computed cache sizes can't be more than this value.
      * @param worldSeed     The world seed.
      */
-    public CachingRegionContext( int initCacheSize, int cacheSizeMul, int cacheLimit, long worldSeed ) {
-        this.initCacheSize = Math.min( cacheLimit, initCacheSize );
+    public LazyRegionContext(int initCacheSize, int cacheSizeMul, int cacheLimit, long worldSeed) {
+        this.initCacheSize = Math.min(cacheLimit, initCacheSize);
         this.cacheSizeMul = cacheSizeMul;
         this.cacheLimit = cacheLimit;
         this.worldSeed = worldSeed;
@@ -69,25 +69,25 @@ public class CachingRegionContext implements RegionContext<CachingRegion> {
      * {@inheritDoc}
      */
     @Override
-    public CachingRegion create( Region generator ) {
-        return new CachingRegion( generator, initCacheSize );
+    public LazyRegion create(Region generator) {
+        return new LazyRegion(generator, initCacheSize);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegion create( Region generator, CachingRegion region ) {
-        return new CachingRegion( generator, computeCacheSize( region.getMaxCacheSize() ) );
+    public LazyRegion create(Region generator, LazyRegion region) {
+        return new LazyRegion(generator, computeCacheSize(region.getMaxCacheSize()));
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegion create( Region generator, CachingRegion regionA, CachingRegion regionB ) {
-        int max = Math.max( regionA.getMaxCacheSize(), regionB.getMaxCacheSize() );
-        return new CachingRegion( generator, computeCacheSize( max ) );
+    public LazyRegion create(Region generator, LazyRegion regionA, LazyRegion regionB) {
+        int max = Math.max(regionA.getMaxCacheSize(), regionB.getMaxCacheSize());
+        return new LazyRegion(generator, computeCacheSize(max));
     }
 
     private int computeCacheSize( int size ) {
@@ -114,63 +114,63 @@ public class CachingRegionContext implements RegionContext<CachingRegion> {
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder extend( RegionFactory<CachingRegion> factory, long seed ) {
-        return new CachingRegionBuilder( this, factory, seed );
+    public LazyRegionBuilder extend(RegionFactory<LazyRegion> factory, long seed) {
+        return new LazyRegionBuilder(this, factory, seed);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder extend( RegionFactory<CachingRegion> factory ) {
-        return extend( factory, worldSeed & 0xFFFF );
+    public LazyRegionBuilder extend(RegionFactory<LazyRegion> factory) {
+        return extend(factory, worldSeed & 0xFFFF);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder generate( GeneratorLayer layer, long seed ) {
-        return new CachingRegionBuilder( this, layer.factory( this, seed ), seed );
+    public LazyRegionBuilder generate(GeneratorLayer layer, long seed) {
+        return new LazyRegionBuilder(this, layer.factory(this, seed), seed);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder generate( GeneratorLayer layer ) {
-        return generate( layer, worldSeed & 0xFFFF );
+    public LazyRegionBuilder generate(GeneratorLayer layer) {
+        return generate(layer, worldSeed & 0xFFFF);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder transform( TransformerLayer layer, RegionFactory<CachingRegion> factory, long seed ) {
-        return new CachingRegionBuilder( this, layer.factory( this, seed, factory ), seed );
+    public LazyRegionBuilder transform(TransformerLayer layer, RegionFactory<LazyRegion> factory, long seed) {
+        return new LazyRegionBuilder(this, layer.factory(this, seed, factory), seed);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder transform( TransformerLayer layer, RegionFactory<CachingRegion> factory ) {
-        return transform( layer, factory, worldSeed & 0xFFFF );
+    public LazyRegionBuilder transform(TransformerLayer layer, RegionFactory<LazyRegion> factory) {
+        return transform(layer, factory, worldSeed & 0xFFFF);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder merge( MergerLayer layer, RegionFactory<CachingRegion> factoryA, RegionFactory<CachingRegion> factoryB, long seed ) {
-        return new CachingRegionBuilder( this, layer.factory( this, seed, factoryA, factoryB ), seed );
+    public LazyRegionBuilder merge(MergerLayer layer, RegionFactory<LazyRegion> factoryA, RegionFactory<LazyRegion> factoryB, long seed) {
+        return new LazyRegionBuilder(this, layer.factory(this, seed, factoryA, factoryB), seed);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder merge( MergerLayer layer, RegionFactory<CachingRegion> factoryA, RegionFactory<CachingRegion> factoryB ) {
-        return merge( layer, factoryA, factoryB, worldSeed & 0xFFFF );
+    public LazyRegionBuilder merge(MergerLayer layer, RegionFactory<LazyRegion> factoryA, RegionFactory<LazyRegion> factoryB) {
+        return merge(layer, factoryA, factoryB, worldSeed & 0xFFFF);
     }
 }

@@ -3,43 +3,43 @@
  * Licensed under Apache 2.0 license
  */
 
-package net.shadew.ptg.noise.perlin;
+package net.shadew.ptg.noise.value;
 
 import net.shadew.ptg.noise.BaseNoise2D;
 import net.shadew.ptg.noise.util.Hash;
 
 /**
- * 2D Perlin noise generator.
+ * 2D Value noise generator.
  */
-public class Perlin2D extends BaseNoise2D {
+public class Value2D extends BaseNoise2D {
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Value noise generator
      *
      * @param seed The seed, may be any {@link int}
      */
-    public Perlin2D(int seed) {
+    public Value2D(int seed) {
         super(seed);
     }
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Value noise generator
      *
      * @param seed  The seed, may be any {@link int}
      * @param scale The coordinate scaling along all axes
      */
-    public Perlin2D(int seed, double scale) {
+    public Value2D(int seed, double scale) {
         super(seed, scale);
     }
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Value noise generator
      *
      * @param seed   The seed, may be any {@link int}
      * @param scaleX The coordinate scaling along X axis
      * @param scaleY The coordinate scaling along Y axis
      */
-    public Perlin2D(int seed, double scaleX, double scaleY) {
+    public Value2D(int seed, double scaleX, double scaleY) {
         super(seed, scaleX, scaleY);
     }
 
@@ -52,6 +52,6 @@ public class Perlin2D extends BaseNoise2D {
         x /= scaleX;
         y /= scaleY;
 
-        return Perlin.compute(x, y, this::hash);
+        return Value.compute(x, y, this::hash);
     }
 }

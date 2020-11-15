@@ -9,7 +9,7 @@ package net.shadew.ptg.region;
  * A function that maps XZ-coordinates to integers, based on a procedurally generated noise field. These values are
  * either generated directly, or read from a cache map.
  *
- * @see CachingRegion
+ * @see LazyRegion
  */
 @FunctionalInterface
 public interface Region {

@@ -11,17 +11,17 @@ import net.shadew.ptg.rng.LongScrambler;
 import java.util.function.Function;
 
 /**
- * A builder for {@link CachingRegion}s, managed by a {@link CachingRegionContext}.
+ * A builder for {@link LazyRegion}s, managed by a {@link LazyRegionContext}.
  */
-public class CachingRegionBuilder implements RegionBuilder<CachingRegion, CachingRegionBuilder> {
+public class LazyRegionBuilder implements RegionBuilder<LazyRegion, LazyRegionBuilder> {
     /** A default seed scrambler to compute a series of seeds for each applied transformation. */
-    private static final LongScrambler DEFAULT_SCRAMBLER = LongScrambler.xorshift( 13, - 17, 5, - 23, 19, - 7 ).masked( 0xFFFFL );
+    private static final LongScrambler DEFAULT_SCRAMBLER = LongScrambler.xorshift(13, -17, 5, -23, 19, -7).masked(0xFFFFL);
 
     /** The managing region context. */
-    private final CachingRegionContext context;
+    private final LazyRegionContext context;
 
     /** The built {@link RegionFactory} chain. */
-    private RegionFactory<CachingRegion> factory;
+    private RegionFactory<LazyRegion> factory;
 
     /** The current seed, which is scrambled by {@link #DEFAULT_SCRAMBLER} to create a series of random seeds. */
     private long seed;
@@ -29,27 +29,27 @@ public class CachingRegionBuilder implements RegionBuilder<CachingRegion, Cachin
     /**
      * Creates a caching region builder. This constructor must be used via one of:
      * <ul>
-     *     <li>{@link CachingRegionContext#extend}</li>
-     *     <li>{@link CachingRegionContext#generate}</li>
-     *     <li>{@link CachingRegionContext#transform}</li>
-     *     <li>{@link CachingRegionContext#merge}</li>
+     *     <li>{@link LazyRegionContext#extend}</li>
+     *     <li>{@link LazyRegionContext#generate}</li>
+     *     <li>{@link LazyRegionContext#transform}</li>
+     *     <li>{@link LazyRegionContext#merge}</li>
      * </ul>
      *
-     * @param context  The managing region context that is used to create {@link CachingRegion}s.
+     * @param context  The managing region context that is used to create {@link LazyRegion}s.
      * @param root     The root factory. This is needed to build a factory chain and must not be null.
      * @param rootSeed The root seed to be scrambled.
      */
-    CachingRegionBuilder( CachingRegionContext context, RegionFactory<CachingRegion> root, long rootSeed ) {
+    LazyRegionBuilder(LazyRegionContext context, RegionFactory<LazyRegion> root, long rootSeed) {
         this.context = context;
         this.factory = root;
-        this.seed = DEFAULT_SCRAMBLER.scramble( rootSeed );
+        this.seed = DEFAULT_SCRAMBLER.scramble(rootSeed);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionContext getContext() {
+    public LazyRegionContext getContext() {
         return context;
     }
 
@@ -57,7 +57,7 @@ public class CachingRegionBuilder implements RegionBuilder<CachingRegion, Cachin
      * {@inheritDoc}
      */
     @Override
-    public RegionFactory<CachingRegion> getFactory() {
+    public RegionFactory<LazyRegion> getFactory() {
         return factory;
     }
 
@@ -65,8 +65,8 @@ public class CachingRegionBuilder implements RegionBuilder<CachingRegion, Cachin
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder apply( Function<RegionFactory<CachingRegion>, RegionFactory<CachingRegion>> function ) {
-        factory = function.apply( factory );
+    public LazyRegionBuilder apply(Function<RegionFactory<LazyRegion>, RegionFactory<LazyRegion>> function) {
+        factory = function.apply(factory);
         return this;
     }
 
@@ -74,7 +74,7 @@ public class CachingRegionBuilder implements RegionBuilder<CachingRegion, Cachin
      * {@inheritDoc}
      */
     @Override
-    public CachingRegionBuilder setSeed( long seed ) {
+    public LazyRegionBuilder setSeed(long seed) {
         this.seed = seed;
         return this;
     }

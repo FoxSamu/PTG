@@ -53,7 +53,7 @@ public final class NoiseMath {
      */
     public static double clamp( double a, double b, double x ) {
         if( a > b ) throw new IllegalArgumentException( "Minimum limit is more than maximum limit" );
-        return x < a ? a : x > b ? b : x;
+        return x < a ? a : Math.min(x, b);
     }
 
     public static long floor( double v ) {

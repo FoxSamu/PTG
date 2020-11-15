@@ -3,44 +3,44 @@
  * Licensed under Apache 2.0 license
  */
 
-package net.shadew.ptg.noise.perlin;
+package net.shadew.ptg.noise.value;
 
-import net.shadew.ptg.noise.util.Hash;
 import net.shadew.ptg.noise.RepetitiveNoise3D;
+import net.shadew.ptg.noise.util.Hash;
 
 /**
- * 3D Perlin noise generator.
+ * Repeating 3D Value noise generator.
  */
-public class RepetitivePerlin3D extends RepetitiveNoise3D {
+public class RepetitiveValue3D extends RepetitiveNoise3D {
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Repeating Value noise generator
      *
      * @param seed The seed, may be any {@link int}
      */
-    public RepetitivePerlin3D( int seed, int repeat ) {
-        super( seed, repeat );
+    public RepetitiveValue3D(int seed, int repeat) {
+        super(seed, repeat);
     }
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Repeating Value noise generator
      *
      * @param seed  The seed, may be any {@link int}
      * @param scale The coordinate scaling along all axes
      */
-    public RepetitivePerlin3D( int seed, double scale, int repeat ) {
-        super( seed, scale, repeat );
+    public RepetitiveValue3D(int seed, double scale, int repeat) {
+        super(seed, scale, repeat);
     }
 
     /**
-     * Constructs a Perlin noise generator
+     * Constructs a Repeating Value noise generator
      *
      * @param seed   The seed, may be any {@link int}
      * @param scaleX The coordinate scaling along X axis
      * @param scaleY The coordinate scaling along Y axis
      * @param scaleZ The coordinate scaling along Z axis
      */
-    public RepetitivePerlin3D(int seed, double scaleX, double scaleY, double scaleZ, int repeatX, int repeatY, int repeatZ) {
+    public RepetitiveValue3D(int seed, double scaleX, double scaleY, double scaleZ, int repeatX, int repeatY, int repeatZ) {
         super(seed, scaleX, scaleY, scaleZ, repeatX, repeatY, repeatZ);
     }
 
@@ -58,6 +58,6 @@ public class RepetitivePerlin3D extends RepetitiveNoise3D {
         y /= scaleY;
         z /= scaleZ;
 
-        return Perlin.compute(x, y, z, this::hash);
+        return Value.compute(x, y, z, this::hash);
     }
 }

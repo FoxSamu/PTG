@@ -9,9 +9,9 @@ import it.unimi.dsi.fastutil.longs.Long2IntLinkedOpenHashMap;
 
 /**
  * A {@link Region} implementation that caches the generated values. Such regions are usually managed and created by a
- * {@link CachingRegionContext} instance.
+ * {@link LazyRegionContext} instance.
  */
-public class CachingRegion implements Region {
+public class LazyRegion implements Region {
     /** The underlying {@link Region} which generates values or transforms values from another {@link Region}. */
     private final Region generator;
 
@@ -22,33 +22,34 @@ public class CachingRegion implements Region {
     private final Long2IntLinkedOpenHashMap cache;
 
     /**
-     * Creates a {@link CachingRegion}. This is usually done by a {@link CachingRegionContext} instance.
+     * Creates a {@link LazyRegion}. This is usually done by a {@link LazyRegionContext} instance.
      *
      * @param generator The underlying {@link Region} (see {@link #generator})
      * @param cacheSize The cache size limit (see {@link #cacheSize})
      */
-    public CachingRegion( Region generator, int cacheSize ) {
+    public LazyRegion(Region generator, int cacheSize) {
         this.generator = generator;
         this.cacheSize = cacheSize;
         cache = new Long2IntLinkedOpenHashMap();
-        cache.defaultReturnValue( Integer.MIN_VALUE );
+        cache.defaultReturnValue(Integer.MIN_VALUE);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public int getValue( int x, int z ) {
-        long key = asLong( x, z );
-        synchronized( cache ) {
-            int cached = cache.get( key );
-            if( cached != Integer.MIN_VALUE ) {
-                return cached;
+    public int getValue(int x, int z) {
+        long key = asLong(x, z);
+        synchronized (cache) {
+            if (cache.containsKey(key)) {
+                // Value cached
+                return cache.get(key);
             } else {
-                int value = generator.getValue( x, z );
-                cache.put( key, value );
-                if( cache.size() > cacheSize ) {
-                    for( int i = 0; i < cacheSize / 16; ++ i ) {
+                // Value not cached, generate it
+                int value = generator.getValue(x, z);
+                cache.put(key, value);
+                if (cache.size() > cacheSize) {
+                    for (int i = 0; i < cacheSize / 16; ++i) {
                         cache.removeLastInt();
                     }
                 }
@@ -58,13 +59,23 @@ public class CachingRegion implements Region {
     }
 
     /**
-     * Returns the cache size limit of this {@link CachingRegion}.
+     * Returns the cache size limit of this {@link LazyRegion}.
      */
     public int getMaxCacheSize() {
         return cacheSize;
     }
 
-    private long asLong( int x, int z ) {
+    /**
+     * Packs x-z coordinates into a {@code long} value, as by:
+     * <pre>
+     * (x & 0xFFFFFFFFL) << 32 | z & 0xFFFFFFFFL
+     * </pre>
+     *
+     * @param x X coordinate
+     * @param z Z coordinate
+     * @return The packed coordinates
+     */
+    private static long asLong(int x, int z) {
         return (x & 0xFFFFFFFFL) << 32 | z & 0xFFFFFFFFL;
     }
 }

@@ -15,8 +15,8 @@ import net.shadew.ptg.noise.util.NoiseMath;
 @FunctionalInterface
 public interface Noise3D {
 
-    default double generateMultiplied( double x, double y, double z, double multiplier ) {
-        return generate( x, y, z ) * multiplier;
+    default double generateMultiplied(double x, double y, double z, double multiplier) {
+        return generate(x, y, z) * multiplier;
     }
 
     /**
@@ -27,7 +27,7 @@ public interface Noise3D {
      * @param z The z coordinate
      * @return The generated noise value
      */
-    double generate( double x, double y, double z );
+    double generate(double x, double y, double z);
 
     /**
      * Creates a noise generator that adds a constant value to the generated noise of this noise generator.
@@ -35,8 +35,8 @@ public interface Noise3D {
      * @param amount The constant value to add
      * @return The created noise generator
      */
-    default Noise3D add( double amount ) {
-        return ( x, y, z ) -> generate( x, y, z ) + amount;
+    default Noise3D add(double amount) {
+        return (x, y, z) -> generate(x, y, z) + amount;
     }
 
     /**
@@ -45,8 +45,8 @@ public interface Noise3D {
      * @param amount The constant value to subtract
      * @return The created noise generator
      */
-    default Noise3D subtract( double amount ) {
-        return ( x, y, z ) -> generate( x, y, z ) - amount;
+    default Noise3D subtract(double amount) {
+        return (x, y, z) -> generate(x, y, z) - amount;
     }
 
     /**
@@ -55,8 +55,8 @@ public interface Noise3D {
      * @param amount The constant value to multiply with
      * @return The created noise generator
      */
-    default Noise3D multiply( double amount ) {
-        return ( x, y, z ) -> generate( x, y, z ) * amount;
+    default Noise3D multiply(double amount) {
+        return (x, y, z) -> generate(x, y, z) * amount;
     }
 
     /**
@@ -65,8 +65,8 @@ public interface Noise3D {
      * @param amount The constant value to divide by
      * @return The created noise generator
      */
-    default Noise3D divide( double amount ) {
-        return ( x, y, z ) -> generate( x, y, z ) / amount;
+    default Noise3D divide(double amount) {
+        return (x, y, z) -> generate(x, y, z) / amount;
     }
 
 
@@ -77,8 +77,8 @@ public interface Noise3D {
      * @param amount The noise generator that generates noise to add
      * @return The created noise generator
      */
-    default Noise3D add( Noise3D amount ) {
-        return ( x, y, z ) -> generate( x, y, z ) + amount.generate( x, y, z );
+    default Noise3D add(Noise3D amount) {
+        return (x, y, z) -> generate(x, y, z) + amount.generate(x, y, z);
     }
 
     /**
@@ -88,8 +88,8 @@ public interface Noise3D {
      * @param amount The noise generator that generates noise to subtract
      * @return The created noise generator
      */
-    default Noise3D subtract( Noise3D amount ) {
-        return ( x, y, z ) -> generate( x, y, z ) - amount.generate( x, y, z );
+    default Noise3D subtract(Noise3D amount) {
+        return (x, y, z) -> generate(x, y, z) - amount.generate(x, y, z);
     }
 
     /**
@@ -99,8 +99,8 @@ public interface Noise3D {
      * @param amount The noise generator that generates noise to multiply with
      * @return The created noise generator
      */
-    default Noise3D multiply( Noise3D amount ) {
-        return ( x, y, z ) -> generate( x, y, z ) * amount.generate( x, y, z );
+    default Noise3D multiply(Noise3D amount) {
+        return (x, y, z) -> generate(x, y, z) * amount.generate(x, y, z);
     }
 
     /**
@@ -110,8 +110,8 @@ public interface Noise3D {
      * @param amount The noise generator that generates noise to divide by
      * @return The created noise generator
      */
-    default Noise3D divide( Noise3D amount ) {
-        return ( x, y, z ) -> generate( x, y, z ) / amount.generate( x, y, z );
+    default Noise3D divide(Noise3D amount) {
+        return (x, y, z) -> generate(x, y, z) / amount.generate(x, y, z);
     }
 
     /**
@@ -120,7 +120,7 @@ public interface Noise3D {
      * @return The created noise generator
      */
     default Noise3D inverse() {
-        return ( x, y, z ) -> - generate( x, y, z );
+        return (x, y, z) -> -generate(x, y, z);
     }
 
     /**
@@ -131,8 +131,8 @@ public interface Noise3D {
      * @param max The constant maximum limit
      * @return The created noise generator
      */
-    default Noise3D lerp( double min, double max ) {
-        return ( x, y, z ) -> NoiseMath.lerp( min, max, ( generate( x, y, z ) + 1 ) / 2 );
+    default Noise3D lerp(double min, double max) {
+        return (x, y, z) -> NoiseMath.lerp(min, max, (generate(x, y, z) + 1) / 2);
     }
 
     /**
@@ -143,8 +143,8 @@ public interface Noise3D {
      * @param max The maximum limit generator
      * @return The created noise generator
      */
-    default Noise3D lerp( Noise3D min, Noise3D max ) {
-        return ( x, y, z ) -> NoiseMath.lerp( min.generate( x, y, z ), max.generate( x, y, z ), ( generate( x, y, z ) + 1 ) / 2 );
+    default Noise3D lerp(Noise3D min, Noise3D max) {
+        return (x, y, z) -> NoiseMath.lerp(min.generate(x, y, z), max.generate(x, y, z), (generate(x, y, z) + 1) / 2);
     }
 
     /**
@@ -153,8 +153,8 @@ public interface Noise3D {
      * @param value The value to generate
      * @return The created noise generator
      */
-    static Noise3D constant( double value ) {
-        return ( x, y, z ) -> value;
+    static Noise3D constant(double value) {
+        return (x, y, z) -> value;
     }
 
     /**
@@ -163,8 +163,8 @@ public interface Noise3D {
      * @param noise The 2D noise generator
      * @return The created 3D noise generator
      */
-    static Noise3D from2DX( Noise2D noise ) {
-        return ( x, y, z ) -> noise.generate( y, z );
+    static Noise3D from2DX(Noise2D noise) {
+        return (x, y, z) -> noise.generate(y, z);
     }
 
     /**
@@ -173,8 +173,8 @@ public interface Noise3D {
      * @param noise The 2D noise generator
      * @return The created 3D noise generator
      */
-    static Noise3D from2DY( Noise2D noise ) {
-        return ( x, y, z ) -> noise.generate( x, z );
+    static Noise3D from2DY(Noise2D noise) {
+        return (x, y, z) -> noise.generate(x, z);
     }
 
     /**
@@ -183,8 +183,8 @@ public interface Noise3D {
      * @param noise The 2D noise generator
      * @return The created 3D noise generator
      */
-    static Noise3D from2DZ( Noise2D noise ) {
-        return ( x, y, z ) -> noise.generate( x, y );
+    static Noise3D from2DZ(Noise2D noise) {
+        return (x, y, z) -> noise.generate(x, y);
     }
 
     /**
@@ -195,14 +195,14 @@ public interface Noise3D {
      * @param noises   The noise generators to combine
      * @return The created noise generator
      */
-    static Noise3D combine( DoubleFunction combiner, Noise3D... noises ) {
-        return ( x, y, z ) -> {
-            double[] arr = new double[ noises.length ];
+    static Noise3D combine(DoubleFunction combiner, Noise3D... noises) {
+        return (x, y, z) -> {
+            double[] arr = new double[noises.length];
             int i = 0;
-            for( Noise3D noise : noises ) {
-                arr[ i ] = noise.generate( x, y, z );
+            for (Noise3D noise : noises) {
+                arr[i] = noise.generate(x, y, z);
             }
-            return combiner.combine( arr );
+            return combiner.combine(arr);
         };
     }
 
@@ -212,8 +212,8 @@ public interface Noise3D {
      * @param scale The scaling of the noise field for every coordinate.
      * @return The created noise generator
      */
-    default Noise3D scale( double scale ) {
-        return ( x, y, z ) -> generate( x * scale, y * scale, z * scale );
+    default Noise3D scale(double scale) {
+        return (x, y, z) -> generate(x * scale, y * scale, z * scale);
     }
 
     /**
@@ -224,8 +224,8 @@ public interface Noise3D {
      * @param z The scaling of the noise field for the Z coordinate.
      * @return The created noise generator
      */
-    default Noise3D scale( double x, double y, double z ) {
-        return ( x1, y1, z1 ) -> generate( x1 * x, y1 * y, z1 * z );
+    default Noise3D scale(double x, double y, double z) {
+        return (x1, y1, z1) -> generate(x1 * x, y1 * y, z1 * z);
     }
 
     /**
@@ -236,7 +236,7 @@ public interface Noise3D {
      * @param z The translation of the noise field along the Z coordinate.
      * @return The created noise generator
      */
-    default Noise3D translate( double x, double y, double z ) {
+    default Noise3D translate(double x, double y, double z) {
         return (x1, y1, z1) -> generate(x1 + x, y1 + y, z1 + z);
     }
 
@@ -246,15 +246,28 @@ public interface Noise3D {
      * @param octaves The amount of octaves
      * @return The created noise generator
      */
-    default Noise3D fractal( int octaves ) {
-        return ( x, y, z ) -> {
+    default Noise3D fractal(int octaves) {
+        return (x, y, z) -> {
             double n = 0;
             double m = 1;
-            for( int i = 0; i < octaves; i++ ) {
-                n += generate( x / m, y / m, z / m ) * m;
+            for (int i = 0; i < octaves; i++) {
+                n += generate(x / m, y / m, z / m) * m;
                 m /= 2;
             }
             return n;
+        };
+    }
+
+    /**
+     * Generates a ridge noise generator from this noise generator. This filters the noise values generated by this
+     * noise generator using the function {@code -(abs(n) * 2 - 1)} where {@code n} is the generated noise value.
+     *
+     * @return The created noise generator
+     */
+    default Noise3D ridge() {
+        return (x, y, z) -> {
+            double n = generate(x, y, z);
+            return -(Math.abs(n) * 2 - 1);
         };
     }
 
@@ -264,7 +277,7 @@ public interface Noise3D {
      * @param seed The seed
      * @return The created noise generator
      */
-    static Noise3D random( int seed ) {
-        return ( x, y, z ) -> Hash.hash3D( seed, NoiseMath.floor( x ), NoiseMath.floor( y ), NoiseMath.floor( z ) ) * 2 - 1;
+    static Noise3D random(int seed) {
+        return (x, y, z) -> Hash.hash3D(seed, NoiseMath.floor(x), NoiseMath.floor(y), NoiseMath.floor(z)) * 2 - 1;
     }
 }
