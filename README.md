@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-    compile 'net.shadew:ptg:1.2.1'
+    compile 'net.shadew:ptg:2.0.0'
 }
 ```
 The latest version depends on the Fastutil library, version 8.2.1. This dependency is automatically included with the PTG library, but this requires that Maven Central is declared as a repository in your buildscript.
