@@ -129,7 +129,7 @@ final class Voronoi {
         for (int ix = -1; ix <= 1; ix++) {
             for (int iy = -1; iy <= 1; iy++) {
                 for (int iz = -1; iz <= 1; iz++) {
-                    if (ix == nearestix && iy == nearestiy)
+                    if (ix == nearestix && iy == nearestiy && iz == nearestiz)
                         continue;
 
                     double px = hfx.hash(minx + ix, miny + iy, minz + iz) / HASH_RANGE + ix + minx;

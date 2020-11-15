@@ -6,9 +6,7 @@
 import net.shadew.ptg.noise.Noise2D;
 import net.shadew.ptg.noise.cell.*;
 import net.shadew.ptg.noise.discrete.*;
-import net.shadew.ptg.noise.opensimplex.FractalOpenSimplex2D;
-import net.shadew.ptg.noise.opensimplex.InverseFractalOpenSimplex2D;
-import net.shadew.ptg.noise.opensimplex.OpenSimplex2D;
+import net.shadew.ptg.noise.opensimplex.*;
 import net.shadew.ptg.noise.perlin.*;
 import net.shadew.ptg.noise.util.NoiseMath;
 import net.shadew.ptg.noise.value.*;
@@ -64,6 +62,41 @@ public final class NoiseExport {
         exportNoise(new File("exports/repetitivefractalworley.png"), 256, 256, new RepetitiveFractalWorley2D(seed, 8, 8), 16);
         exportNoise(new File("exports/repetitivefractalvoronoi.png"), 256, 256, new RepetitiveFractalVoronoi2D(seed, 8, 8), 16);
         exportNoise(new File("exports/repetitivefractalcell.png"), 256, 256, new RepetitiveFractalCell2D(seed, 8, 8), 16);
+
+        exportNoise(new File("exports/3d/perlin.png"), 256, 256, Noise2D.from3D(new Perlin3D(seed), 0.2), 16);
+        exportNoise(new File("exports/3d/value.png"), 256, 256, Noise2D.from3D(new Value3D(seed), 0.2), 16);
+        exportNoise(new File("exports/3d/discrete.png"), 256, 256, Noise2D.from3D(new Discrete3D(seed), 0.2), 16);
+        exportNoise(new File("exports/3d/opensimplex.png"), 256, 256, Noise2D.from3D(new OpenSimplex3D(seed), 0.2), 16);
+        exportNoise(new File("exports/3d/worley.png"), 256, 256, Noise2D.from3D(new Worley3D(seed), 0.2), 16);
+        exportNoise(new File("exports/3d/voronoi.png"), 256, 256, Noise2D.from3D(new Voronoi3D(seed), 0.2), 16);
+        exportNoise(new File("exports/3d/cell.png"), 256, 256, Noise2D.from3D(new Cell3D(seed), 0.2), 16);
+        exportNoise(new File("exports/3d/fractalperlin.png"), 256, 256, Noise2D.from3D(new FractalPerlin3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/fractalvalue.png"), 256, 256, Noise2D.from3D(new FractalValue3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/fractaldiscrete.png"), 256, 256, Noise2D.from3D(new FractalDiscrete3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/fractalopensimplex.png"), 256, 256, Noise2D.from3D(new FractalOpenSimplex3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/fractalworley.png"), 256, 256, Noise2D.from3D(new FractalWorley3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/fractalvoronoi.png"), 256, 256, Noise2D.from3D(new FractalVoronoi3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/fractalcell.png"), 256, 256, Noise2D.from3D(new FractalCell3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/inversefractalperlin.png"), 256, 256, Noise2D.from3D(new InverseFractalPerlin3D(seed, 8), 0.2), 2);
+        exportNoise(new File("exports/3d/inversefractalvalue.png"), 256, 256, Noise2D.from3D(new InverseFractalValue3D(seed, 8), 0.2), 2);
+        exportNoise(new File("exports/3d/inversefractaldiscrete.png"), 256, 256, Noise2D.from3D(new InverseFractalDiscrete3D(seed, 8), 0.2), 2);
+        exportNoise(new File("exports/3d/inversefractalopensimplex.png"), 256, 256, Noise2D.from3D(new InverseFractalOpenSimplex3D(seed, 8), 0.2), 2);
+        exportNoise(new File("exports/3d/inversefractalworley.png"), 256, 256, Noise2D.from3D(new InverseFractalWorley3D(seed, 8), 0.2), 2);
+        exportNoise(new File("exports/3d/inversefractalvoronoi.png"), 256, 256, Noise2D.from3D(new InverseFractalVoronoi3D(seed, 8), 0.2), 2);
+        exportNoise(new File("exports/3d/inversefractalcell.png"), 256, 256, Noise2D.from3D(new InverseFractalCell3D(seed, 8), 0.2), 2);
+        exportNoise(new File("exports/3d/repetitiveperlin.png"), 256, 256, Noise2D.from3D(new RepetitivePerlin3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivevalue.png"), 256, 256, Noise2D.from3D(new RepetitiveValue3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivediscrete.png"), 256, 256, Noise2D.from3D(new RepetitiveDiscrete3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitiveworley.png"), 256, 256, Noise2D.from3D(new RepetitiveWorley3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivevoronoi.png"), 256, 256, Noise2D.from3D(new RepetitiveVoronoi3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivecell.png"), 256, 256, Noise2D.from3D(new RepetitiveCell3D(seed, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivefractalperlin.png"), 256, 256, Noise2D.from3D(new RepetitiveFractalPerlin3D(seed, 8, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivefractalvalue.png"), 256, 256, Noise2D.from3D(new RepetitiveFractalValue3D(seed, 8, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivefractaldiscrete.png"), 256, 256, Noise2D.from3D(new RepetitiveFractalDiscrete3D(seed, 8, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivefractalworley.png"), 256, 256, Noise2D.from3D(new RepetitiveFractalWorley3D(seed, 8, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivefractalvoronoi.png"), 256, 256, Noise2D.from3D(new RepetitiveFractalVoronoi3D(seed, 8, 8), 0.2), 16);
+        exportNoise(new File("exports/3d/repetitivefractalcell.png"), 256, 256, Noise2D.from3D(new RepetitiveFractalCell3D(seed, 8, 8), 0.2), 16);
+
         exportNoise(new File("exports/random.png"), 256, 256, Noise2D.random(seed), 16);
 
         RegionContext<?> ctx = new LazyRegionContext(25, 55122121599L);
