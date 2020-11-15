@@ -24,7 +24,7 @@ public abstract class RepetitiveNoise3D implements Noise3D {
      *
      * @param seed The seed, may be any {@link int}
      */
-    public RepetitiveNoise3D( int seed, int repeat ) {
+    public RepetitiveNoise3D(int seed, int repeat) {
         this.seed = seed;
         this.scaleX = 1;
         this.scaleY = 1;
@@ -40,7 +40,7 @@ public abstract class RepetitiveNoise3D implements Noise3D {
      * @param seed  The seed, may be any {@link int}
      * @param scale The scaling of the noise field along all axes
      */
-    public RepetitiveNoise3D( int seed, double scale, int repeat ) {
+    public RepetitiveNoise3D(int seed, double scale, int repeat) {
         this.seed = seed;
         this.scaleX = scale;
         this.scaleY = scale;
@@ -58,7 +58,7 @@ public abstract class RepetitiveNoise3D implements Noise3D {
      * @param scaleY The scaling of the noise field along Y axis
      * @param scaleZ The scaling of the noise field along Z axis
      */
-    public RepetitiveNoise3D( int seed, double scaleX, double scaleY, double scaleZ, int repeatX, int repeatY, int repeatZ ) {
+    public RepetitiveNoise3D(int seed, double scaleX, double scaleY, double scaleZ, int repeatX, int repeatY, int repeatZ) {
         this.seed = seed;
         this.scaleX = scaleX;
         this.scaleY = scaleY;
@@ -80,7 +80,7 @@ public abstract class RepetitiveNoise3D implements Noise3D {
      *
      * @param seed The new seed
      */
-    public void setSeed( int seed ) {
+    public void setSeed(int seed) {
         this.seed = seed;
     }
 
@@ -94,8 +94,8 @@ public abstract class RepetitiveNoise3D implements Noise3D {
      * @return The generated noise value
      */
     @Override
-    public double generateMultiplied( double x, double y, double z, double mult ) {
-        return generate( x, y, z ) * mult;
+    public double generateMultiplied(double x, double y, double z, double mult) {
+        return generate(x, y, z) * mult;
     }
 
     /**
@@ -108,7 +108,7 @@ public abstract class RepetitiveNoise3D implements Noise3D {
      * @param max The maximum limit of the range
      * @return The generated noise value
      */
-    public double generateInRange( double x, double y, double z, double min, double max ) {
-        return NoiseMath.lerp( min, max, ( generate( x, y, z ) + 1 ) / 2 );
+    public double generateInRange(double x, double y, double z, double min, double max) {
+        return NoiseMath.lerp(min, max, (generate(x, y, z) + 1) / 2);
     }
 }

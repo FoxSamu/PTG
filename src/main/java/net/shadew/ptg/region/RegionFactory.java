@@ -29,7 +29,7 @@ public interface RegionFactory<R extends Region> {
      *
      * @return The created {@link FractalGenerator} instance.
      */
-    default <D extends FractalGenerator<?>> D makeGenerator( Function<Region, ? extends D> factory ) {
-        return factory.apply( buildRegion() );
+    default <D extends FractalGenerator<?>> D makeGenerator(Function<Region, ? extends D> factory) {
+        return factory.apply(buildRegion());
     }
 }

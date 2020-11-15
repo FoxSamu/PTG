@@ -18,7 +18,7 @@ public interface RegionRNG {
      * @param x X coordinate
      * @param z Z coordinate
      */
-    void setPosition( long x, long z );
+    void setPosition(long x, long z);
 
     /**
      * Generates a pseudorandom number below the specified bound.
@@ -26,7 +26,7 @@ public interface RegionRNG {
      * @param bound The upper bound (exclusive).
      * @return The generated pseudorandom number.
      */
-    int random( int bound );
+    int random(int bound);
 
     /**
      * Generates a pseudorandom boolean.
@@ -34,7 +34,7 @@ public interface RegionRNG {
      * @return The generated boolean.
      */
     default boolean randomBool() {
-        return random( 2 ) == 0;
+        return random(2) == 0;
     }
 
     /**
@@ -43,7 +43,7 @@ public interface RegionRNG {
      * @return The generated double.
      */
     default double randomDouble() {
-        return random( Integer.MAX_VALUE ) / (double) Integer.MAX_VALUE;
+        return random(Integer.MAX_VALUE) / (double) Integer.MAX_VALUE;
     }
 
     /**
@@ -52,7 +52,7 @@ public interface RegionRNG {
      * @return The generated float.
      */
     default float randomFloat() {
-        return random( Integer.MAX_VALUE ) / (float) Integer.MAX_VALUE;
+        return random(Integer.MAX_VALUE) / (float) Integer.MAX_VALUE;
     }
 
     /**
@@ -61,8 +61,8 @@ public interface RegionRNG {
      *
      * @return This instance for convenience
      */
-    default RegionRNG position( int x, int z ) {
-        setPosition( x, z );
+    default RegionRNG position(int x, int z) {
+        setPosition(x, z);
         return this;
     }
 
@@ -73,8 +73,8 @@ public interface RegionRNG {
      * @param b Value B
      * @return A or B
      */
-    default int pickRandom( int a, int b ) {
-        if( a == b ) return a;
+    default int pickRandom(int a, int b) {
+        if (a == b) return a;
         return randomBool() ? a : b;
     }
 
@@ -85,8 +85,8 @@ public interface RegionRNG {
      * @param b Value B
      * @return A or B
      */
-    default float pickRandom( float a, float b ) {
-        if( a == b ) return a;
+    default float pickRandom(float a, float b) {
+        if (a == b) return a;
         return randomBool() ? a : b;
     }
 
@@ -99,12 +99,12 @@ public interface RegionRNG {
      * @param d Value D
      * @return A, B, C or D
      */
-    default int pickRandom( int a, int b, int c, int d ) {
-        if( a == b && a == c && a == d ) return a;
-        int rand = random( 4 );
-        if( rand == 0 ) return a;
-        if( rand == 1 ) return b;
-        if( rand == 2 ) return c;
+    default int pickRandom(int a, int b, int c, int d) {
+        if (a == b && a == c && a == d) return a;
+        int rand = random(4);
+        if (rand == 0) return a;
+        if (rand == 1) return b;
+        if (rand == 2) return c;
         return d;
     }
 
@@ -117,12 +117,12 @@ public interface RegionRNG {
      * @param d Value D
      * @return A, B, C or D
      */
-    default float pickRandom( float a, float b, float c, float d ) {
-        if( a == b && a == c && a == d ) return a;
-        int rand = random( 4 );
-        if( rand == 0 ) return a;
-        if( rand == 1 ) return b;
-        if( rand == 2 ) return c;
+    default float pickRandom(float a, float b, float c, float d) {
+        if (a == b && a == c && a == d) return a;
+        int rand = random(4);
+        if (rand == 0) return a;
+        if (rand == 1) return b;
+        if (rand == 2) return c;
         return d;
     }
 
@@ -132,8 +132,8 @@ public interface RegionRNG {
      * @param ints The integer array/varargs to pick from.
      * @return The picked integer
      */
-    default int pickRandom( int... ints ) {
-        return ints[ random( ints.length ) ];
+    default int pickRandom(int... ints) {
+        return ints[random(ints.length)];
     }
 
     /**
@@ -142,7 +142,7 @@ public interface RegionRNG {
      * @param floats The float array/varargs to pick from.
      * @return The picked float
      */
-    default float pickRandom( float... floats ) {
-        return floats[ random( floats.length ) ];
+    default float pickRandom(float... floats) {
+        return floats[random(floats.length)];
     }
 }

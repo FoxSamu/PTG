@@ -5,12 +5,12 @@
 
 package net.shadew.ptg.region;
 
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 import net.shadew.ptg.region.layer.*;
 import net.shadew.ptg.region.util.FloatSelector;
 import net.shadew.ptg.region.util.IntSelector;
-
-import java.util.function.Consumer;
-import java.util.function.Function;
 
 /**
  * A generic builder for {@link Region}s.
@@ -44,7 +44,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @param function The function to apply
      * @return This instance for chaining.
      */
-    T apply( Function<RegionFactory<R>, RegionFactory<R>> function );
+    T apply(Function<RegionFactory<R>, RegionFactory<R>> function);
 
     /**
      * Sets the current seed.
@@ -52,7 +52,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @param seed The new seed
      * @return This instance for chaining
      */
-    T setSeed( long seed );
+    T setSeed(long seed);
 
     /**
      * Computes the next, pseudorandom seed.
@@ -69,8 +69,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @see #zoom()
      */
-    default T zoom( int amount ) {
-        return apply( factory -> ZoomLayer.INSTANCE.magnify( getContext(), nextSeed(), factory, amount ) );
+    default T zoom(int amount) {
+        return apply(factory -> ZoomLayer.INSTANCE.magnify(getContext(), nextSeed(), factory, amount));
     }
 
     /**
@@ -81,7 +81,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @see #zoom(int)
      */
     default T zoom() {
-        return apply( factory -> ZoomLayer.INSTANCE.factory( getContext(), nextSeed(), factory ) );
+        return apply(factory -> ZoomLayer.INSTANCE.factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -92,8 +92,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @see #zoomFuzzy()
      */
-    default T zoomFuzzy( int amount ) {
-        return apply( factory -> FuzzyZoomLayer.INSTANCE.magnify( getContext(), nextSeed(), factory, amount ) );
+    default T zoomFuzzy(int amount) {
+        return apply(factory -> FuzzyZoomLayer.INSTANCE.magnify(getContext(), nextSeed(), factory, amount));
     }
 
     /**
@@ -104,7 +104,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @see #zoomFuzzy(int)
      */
     default T zoomFuzzy() {
-        return apply( factory -> FuzzyZoomLayer.INSTANCE.factory( getContext(), nextSeed(), factory ) );
+        return apply(factory -> FuzzyZoomLayer.INSTANCE.factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -116,8 +116,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @see #zoomInterp()
      */
-    default T zoomInterp( int amount ) {
-        return apply( factory -> InterpolateZoomLayer.INTEGER.magnify( getContext(), nextSeed(), factory, amount ) );
+    default T zoomInterp(int amount) {
+        return apply(factory -> InterpolateZoomLayer.INTEGER.magnify(getContext(), nextSeed(), factory, amount));
     }
 
     /**
@@ -129,7 +129,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @see #zoomInterp(int)
      */
     default T zoomInterp() {
-        return apply( factory -> InterpolateZoomLayer.INTEGER.factory( getContext(), nextSeed(), factory ) );
+        return apply(factory -> InterpolateZoomLayer.INTEGER.factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -141,8 +141,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @see #zoomInterpF()
      */
-    default T zoomInterpF( int amount ) {
-        return apply( factory -> InterpolateZoomLayer.FLOAT.magnify( getContext(), nextSeed(), factory, amount ) );
+    default T zoomInterpF(int amount) {
+        return apply(factory -> InterpolateZoomLayer.FLOAT.magnify(getContext(), nextSeed(), factory, amount));
     }
 
     /**
@@ -154,7 +154,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @see #zoomInterpF(int)
      */
     default T zoomInterpF() {
-        return apply( factory -> InterpolateZoomLayer.FLOAT.factory( getContext(), nextSeed(), factory ) );
+        return apply(factory -> InterpolateZoomLayer.FLOAT.factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -163,7 +163,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @return This instance for chaining
      */
     default T smooth() {
-        return apply( factory -> SmoothingLayer.INSTANCE.factory( getContext(), nextSeed(), factory ) );
+        return apply(factory -> SmoothingLayer.INSTANCE.factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -172,7 +172,7 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @return This instance for chaining
      */
     default T zoomVoronoi() {
-        return apply( factory -> VoronoiZoomLayer.INSTANCE.factory( getContext(), nextSeed(), factory ) );
+        return apply(factory -> VoronoiZoomLayer.INSTANCE.factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -180,8 +180,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T packFP( int precision, float min, float max ) {
-        return apply( factory -> new PackFloatLayer( precision, min, max ).factory( getContext(), nextSeed(), factory ) );
+    default T packFP(int precision, float min, float max) {
+        return apply(factory -> new PackFloatLayer(precision, min, max).factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -189,8 +189,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T packFP( int precision ) {
-        return apply( factory -> new PackFloatLayer( precision, 0, 1 ).factory( getContext(), nextSeed(), factory ) );
+    default T packFP(int precision) {
+        return apply(factory -> new PackFloatLayer(precision, 0, 1).factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -198,8 +198,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T unpackFP( int precision, float min, float max ) {
-        return apply( factory -> new UnpackFloatLayer( precision, min, max ).factory( getContext(), nextSeed(), factory ) );
+    default T unpackFP(int precision, float min, float max) {
+        return apply(factory -> new UnpackFloatLayer(precision, min, max).factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -207,8 +207,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T unpackFP( int precision ) {
-        return apply( factory -> new UnpackFloatLayer( precision, 0, 1 ).factory( getContext(), nextSeed(), factory ) );
+    default T unpackFP(int precision) {
+        return apply(factory -> new UnpackFloatLayer(precision, 0, 1).factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -216,8 +216,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T replace( IntSelector sel, int value ) {
-        return transform( new ReplaceLayer( sel, value ) );
+    default T replace(IntSelector sel, int value) {
+        return transform(new ReplaceLayer(sel, value));
     }
 
     /**
@@ -225,8 +225,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T replace( int sel, int value ) {
-        return transform( new ReplaceLayer( sel, value ) );
+    default T replace(int sel, int value) {
+        return transform(new ReplaceLayer(sel, value));
     }
 
     /**
@@ -234,8 +234,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T replaceF( FloatSelector sel, float value ) {
-        return transform( new ReplaceLayer( sel, value ) );
+    default T replaceF(FloatSelector sel, float value) {
+        return transform(new ReplaceLayer(sel, value));
     }
 
     /**
@@ -243,8 +243,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T replaceF( float sel, float value ) {
-        return transform( new ReplaceLayer( sel, value ) );
+    default T replaceF(float sel, float value) {
+        return transform(new ReplaceLayer(sel, value));
     }
 
     /**
@@ -252,8 +252,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T arithmetic( ArithmeticTransformerLayer layer ) {
-        return transform( layer );
+    default T arithmetic(ArithmeticTransformerLayer layer) {
+        return transform(layer);
     }
 
     /**
@@ -261,8 +261,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T arithmeticF( FloatArithmeticTransformerLayer layer ) {
-        return transform( layer );
+    default T arithmeticF(FloatArithmeticTransformerLayer layer) {
+        return transform(layer);
     }
 
     /**
@@ -271,8 +271,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @param layer The {@link TransformerLayer} to apply.
      * @return This instance for chaining
      */
-    default T transform( TransformerLayer layer ) {
-        return apply( factory -> layer.factory( getContext(), nextSeed(), factory ) );
+    default T transform(TransformerLayer layer) {
+        return apply(factory -> layer.factory(getContext(), nextSeed(), factory));
     }
 
     /**
@@ -281,8 +281,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T replace( IntSelector sel, RegionFactory<R> other ) {
-        return merge( new ReplaceMergeLayer( sel ), other );
+    default T replace(IntSelector sel, RegionFactory<R> other) {
+        return merge(new ReplaceMergeLayer(sel), other);
     }
 
     /**
@@ -291,8 +291,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T replace( int sel, RegionFactory<R> other ) {
-        return merge( new ReplaceMergeLayer( sel ), other );
+    default T replace(int sel, RegionFactory<R> other) {
+        return merge(new ReplaceMergeLayer(sel), other);
     }
 
     /**
@@ -301,8 +301,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T replaceF( FloatSelector sel, RegionFactory<R> other ) {
-        return merge( new ReplaceMergeLayer( sel ), other );
+    default T replaceF(FloatSelector sel, RegionFactory<R> other) {
+        return merge(new ReplaceMergeLayer(sel), other);
     }
 
     /**
@@ -311,8 +311,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T replaceF( float sel, RegionFactory<R> other ) {
-        return merge( new ReplaceMergeLayer( sel ), other );
+    default T replaceF(float sel, RegionFactory<R> other) {
+        return merge(new ReplaceMergeLayer(sel), other);
     }
 
     /**
@@ -321,8 +321,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T arithmetic( ArithmeticMergerLayer layer, RegionFactory<R> otherFactory ) {
-        return merge( layer, otherFactory );
+    default T arithmetic(ArithmeticMergerLayer layer, RegionFactory<R> otherFactory) {
+        return merge(layer, otherFactory);
     }
 
     /**
@@ -331,8 +331,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @return This instance for chaining
      */
-    default T arithmeticF( FloatArithmeticMergerLayer layer, RegionFactory<R> otherFactory ) {
-        return merge( layer, otherFactory );
+    default T arithmeticF(FloatArithmeticMergerLayer layer, RegionFactory<R> otherFactory) {
+        return merge(layer, otherFactory);
     }
 
     /**
@@ -342,8 +342,8 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @param layer The {@link MergerLayer} to apply.
      * @return This instance for chaining
      */
-    default T merge( MergerLayer layer, RegionFactory<R> otherFactory ) {
-        return apply( factory -> layer.factory( getContext(), nextSeed(), factory, otherFactory ) );
+    default T merge(MergerLayer layer, RegionFactory<R> otherFactory) {
+        return apply(factory -> layer.factory(getContext(), nextSeed(), factory, otherFactory));
     }
 
     /**
@@ -353,9 +353,9 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      * @param consumer The consumer that handles the new {@link FractalGenerator} instance.
      * @return This instance for chaining
      */
-    @SuppressWarnings( "unchecked" )
-    default <D extends FractalGenerator<?>> T export( Consumer<? super D> consumer, Function<Region, ? extends D> factory ) {
-        consumer.accept( makeGenerator( factory ) );
+    @SuppressWarnings("unchecked")
+    default <D extends FractalGenerator<?>> T export(Consumer<? super D> consumer, Function<Region, ? extends D> factory) {
+        consumer.accept(makeGenerator(factory));
         return (T) this;
     }
 
@@ -369,9 +369,9 @@ public interface RegionBuilder<R extends Region, T extends RegionBuilder<R, T>> 
      *
      * @throws ArrayIndexOutOfBoundsException When the specified index is out of the array's bounds.
      */
-    @SuppressWarnings( "unchecked" )
-    default <D extends FractalGenerator<?>> T export( D[] arr, int index, Function<Region, ? extends D> factory ) {
-        arr[ index ] = makeGenerator( factory );
+    @SuppressWarnings("unchecked")
+    default <D extends FractalGenerator<?>> T export(D[] arr, int index, Function<Region, ? extends D> factory) {
+        arr[index] = makeGenerator(factory);
         return (T) this;
     }
 }

@@ -11,9 +11,9 @@ import net.shadew.ptg.region.RegionRNG;
 @FunctionalInterface
 public interface FilterTransformerLayer extends TransformerLayer {
     @Override
-    default int generate( RegionRNG rng, Region region, int x, int z ) {
-        return generate( rng, region.getValue( x, z ) );
+    default int generate(RegionRNG rng, Region region, int x, int z) {
+        return generate(rng, region.getValue(x, z));
     }
 
-    int generate( RegionRNG rng, int value );
+    int generate(RegionRNG rng, int value);
 }

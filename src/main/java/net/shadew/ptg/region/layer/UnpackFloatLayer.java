@@ -19,8 +19,8 @@ public class UnpackFloatLayer implements FilterTransformerLayer {
     }
 
     @Override
-    public int generate( RegionRNG rng, int value ) {
-        float t = value / (float) ( precision - 1 );
-        return Float.floatToRawIntBits( t * ( max - min ) + min );
+    public int generate(RegionRNG rng, int value) {
+        float t = value / (float) (precision - 1);
+        return Float.floatToRawIntBits(t * (max - min) + min);
     }
 }

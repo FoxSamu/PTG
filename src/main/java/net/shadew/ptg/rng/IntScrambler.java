@@ -23,7 +23,7 @@ public interface IntScrambler {
      * @param seed The input value: a 'seed'.
      * @return The output value.
      */
-    int scramble( int seed );
+    int scramble(int seed);
 
     /**
      * Creates a basic linear congruential (LGC) scrambler:
@@ -33,7 +33,7 @@ public interface IntScrambler {
      * @param mul The multiplier constant.
      * @return A LGC long scrambler
      */
-    static IntScrambler lgc( int add, int mul ) {
+    static IntScrambler lgc(int add, int mul) {
         return seed -> seed * mul + add;
     }
 }

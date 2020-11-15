@@ -20,7 +20,7 @@ public abstract class BaseNoise2D implements Noise2D {
      *
      * @param seed The seed, may be any {@link int}
      */
-    protected BaseNoise2D( int seed ) {
+    protected BaseNoise2D(int seed) {
         this.seed = seed;
         this.scaleX = 1;
         this.scaleY = 1;
@@ -32,7 +32,7 @@ public abstract class BaseNoise2D implements Noise2D {
      * @param seed  The seed, may be any {@link int}
      * @param scale The scaling of the noise field along all axes
      */
-    protected BaseNoise2D( int seed, double scale ) {
+    protected BaseNoise2D(int seed, double scale) {
         this.seed = seed;
         this.scaleX = scale;
         this.scaleY = scale;
@@ -45,7 +45,7 @@ public abstract class BaseNoise2D implements Noise2D {
      * @param scaleX The scaling of the noise field along X axis
      * @param scaleY The scaling of the noise field along Y axis
      */
-    protected BaseNoise2D( int seed, double scaleX, double scaleY ) {
+    protected BaseNoise2D(int seed, double scaleX, double scaleY) {
         this.seed = seed;
         this.scaleX = scaleX;
         this.scaleY = scaleY;
@@ -60,8 +60,8 @@ public abstract class BaseNoise2D implements Noise2D {
      * @return The generated noise value
      */
     @Override
-    public double generateMultiplied( double x, double y, double mult ) {
-        return generate( x, y ) * mult;
+    public double generateMultiplied(double x, double y, double mult) {
+        return generate(x, y) * mult;
     }
 
     /**
@@ -73,8 +73,8 @@ public abstract class BaseNoise2D implements Noise2D {
      * @param max The maximum limit of the range
      * @return The generated noise value
      */
-    public double generateInRange( double x, double y, double min, double max ) {
-        return NoiseMath.lerp( min, max, ( generate( x, y ) + 1 ) / 2 );
+    public double generateInRange(double x, double y, double min, double max) {
+        return NoiseMath.lerp(min, max, (generate(x, y) + 1) / 2);
     }
 
     /**
@@ -82,7 +82,7 @@ public abstract class BaseNoise2D implements Noise2D {
      *
      * @param seed The new seed
      */
-    public void setSeed( int seed ) {
+    public void setSeed(int seed) {
         this.seed = seed;
     }
 

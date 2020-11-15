@@ -17,6 +17,6 @@ public class NoiseLayer implements FloatGeneratorLayer {
 
     @Override
     public float generateFP(RegionRNG rng, int x, int z) {
-        return (float) noise.generate( x, z );
+        return (float) noise.generate(x, z);
     }
 }

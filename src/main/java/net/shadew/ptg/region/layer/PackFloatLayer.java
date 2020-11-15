@@ -19,17 +19,17 @@ public class PackFloatLayer implements FilterTransformerLayer {
     }
 
     @Override
-    public int generate( RegionRNG rng, int value ) {
-        float t = ( clamp( Float.intBitsToFloat( value ), min, max ) - min ) / ( max - min );
-        return floor( t * ( precision - 1 ) );
+    public int generate(RegionRNG rng, int value) {
+        float t = (clamp(Float.intBitsToFloat(value), min, max) - min) / (max - min);
+        return floor(t * (precision - 1));
     }
 
-    private static float clamp( float val, float min, float max ) {
-        if( val > max ) return max;
-        return Math.max( val, min );
+    private static float clamp(float val, float min, float max) {
+        if (val > max) return max;
+        return Math.max(val, min);
     }
 
-    private static int floor( float val ) {
+    private static int floor(float val) {
         int ival = (int) val;
         return val < 0 ? ival - 1 : ival;
     }

@@ -5,7 +5,6 @@
 
 package net.shadew.ptg.noise.perlin;
 
-import net.shadew.ptg.noise.BaseNoise2D;
 import net.shadew.ptg.noise.RepetitiveNoise2D;
 
 /**

@@ -21,17 +21,17 @@ public class InverseFractalOpenSimplex2D extends BaseNoise2D {
      * @param seed    The seed, may be any {@code int}.
      * @param octaves The amount of octaves.
      */
-    public InverseFractalOpenSimplex2D( int seed, int octaves ) {
-        super( seed );
+    public InverseFractalOpenSimplex2D(int seed, int octaves) {
+        super(seed);
 
-        if( octaves < 1 ) {
-            throw new IllegalArgumentException( "There should be at least one octave." );
+        if (octaves < 1) {
+            throw new IllegalArgumentException("There should be at least one octave.");
         }
 
-        noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[octaves];
 
-        for( int i = 0; i < octaves; i++ ) {
-            noiseOctaves[ i ] = new OpenSimplex2D( seed + i );
+        for (int i = 0; i < octaves; i++) {
+            noiseOctaves[i] = new OpenSimplex2D(seed + i);
         }
     }
 
@@ -42,17 +42,17 @@ public class InverseFractalOpenSimplex2D extends BaseNoise2D {
      * @param scale   The coordinate scaling along every axis.
      * @param octaves The amount of octaves.
      */
-    public InverseFractalOpenSimplex2D( int seed, double scale, int octaves ) {
-        super( seed, scale );
+    public InverseFractalOpenSimplex2D(int seed, double scale, int octaves) {
+        super(seed, scale);
 
-        if( octaves < 1 ) {
-            throw new IllegalArgumentException( "There should be at least one octave." );
+        if (octaves < 1) {
+            throw new IllegalArgumentException("There should be at least one octave.");
         }
 
-        noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[octaves];
 
-        for( int i = 0; i < octaves; i++ ) {
-            noiseOctaves[ i ] = new OpenSimplex2D( seed );
+        for (int i = 0; i < octaves; i++) {
+            noiseOctaves[i] = new OpenSimplex2D(seed);
         }
     }
 
@@ -64,40 +64,40 @@ public class InverseFractalOpenSimplex2D extends BaseNoise2D {
      * @param scaleY  The coordinate scaling along Y axis.
      * @param octaves The amount of octaves.
      */
-    public InverseFractalOpenSimplex2D( int seed, double scaleX, double scaleY, int octaves ) {
-        super( seed, scaleX, scaleY );
+    public InverseFractalOpenSimplex2D(int seed, double scaleX, double scaleY, int octaves) {
+        super(seed, scaleX, scaleY);
 
-        if( octaves < 1 ) {
-            throw new IllegalArgumentException( "There should be at least one octave." );
+        if (octaves < 1) {
+            throw new IllegalArgumentException("There should be at least one octave.");
         }
 
-        noiseOctaves = new OpenSimplex2D[ octaves ];
+        noiseOctaves = new OpenSimplex2D[octaves];
 
-        for( int i = 0; i < octaves; i++ ) {
-            noiseOctaves[ i ] = new OpenSimplex2D( seed );
+        for (int i = 0; i < octaves; i++) {
+            noiseOctaves[i] = new OpenSimplex2D(seed);
         }
     }
 
     @Override
-    public double generate( double x, double y ) {
+    public double generate(double x, double y) {
         x /= scaleX;
         y /= scaleY;
 
         double d = 1;
         double n = 0;
 
-        for( OpenSimplex2D noise : noiseOctaves ) {
-            n += noise.generate( x / d, y / d ) * d;
+        for (OpenSimplex2D noise : noiseOctaves) {
+            n += noise.generate(x / d, y / d) * d;
             d *= 2;
         }
         return n;
     }
 
     @Override
-    public void setSeed( int seed ) {
+    public void setSeed(int seed) {
         this.seed = seed;
-        for( OpenSimplex2D noise : noiseOctaves ) {
-            noise.setSeed( seed++ );
+        for (OpenSimplex2D noise : noiseOctaves) {
+            noise.setSeed(seed++);
         }
     }
 }

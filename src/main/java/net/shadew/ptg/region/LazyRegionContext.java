@@ -90,8 +90,8 @@ public class LazyRegionContext implements RegionContext<LazyRegion> {
         return new LazyRegion(generator, computeCacheSize(max));
     }
 
-    private int computeCacheSize( int size ) {
-        return Math.min( cacheLimit, size * cacheSizeMul );
+    private int computeCacheSize(int size) {
+        return Math.min(cacheLimit, size * cacheSizeMul);
     }
 
     /**
@@ -106,8 +106,8 @@ public class LazyRegionContext implements RegionContext<LazyRegion> {
      * {@inheritDoc}
      */
     @Override
-    public RegionRNG getRNG( long seed ) {
-        return new LinearCongruentialRNG( worldSeed, seed );
+    public RegionRNG getRNG(long seed) {
+        return new LinearCongruentialRNG(worldSeed, seed);
     }
 
     /**

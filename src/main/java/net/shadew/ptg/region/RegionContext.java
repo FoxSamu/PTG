@@ -22,7 +22,7 @@ public interface RegionContext<R extends Region> {
      * @param generator The underlying {@link Region} generator.
      * @return The created {@link Region}
      */
-    R create( Region generator );
+    R create(Region generator);
 
     /**
      * Creates a wrapping transformer {@link Region}.
@@ -31,7 +31,7 @@ public interface RegionContext<R extends Region> {
      * @param region    The {@link Region} that's being transformed.
      * @return The created {@link Region}
      */
-    R create( Region generator, R region );
+    R create(Region generator, R region);
 
     /**
      * Creates a wrapping merger {@link Region}.
@@ -41,7 +41,7 @@ public interface RegionContext<R extends Region> {
      * @param regionB   The second {@link Region} that's being merged.
      * @return The created {@link Region}
      */
-    R create( Region generator, R regionA, R regionB );
+    R create(Region generator, R regionA, R regionB);
 
     /**
      * Returns the world seed this context relies on, which is used to create {@link Region} factories.
@@ -56,7 +56,7 @@ public interface RegionContext<R extends Region> {
      * @param seed The seed for this instance.
      * @return The created {@link RegionRNG} instance.
      */
-    RegionRNG getRNG( long seed );
+    RegionRNG getRNG(long seed);
 
     /**
      * Creates a {@link RegionBuilder} by extending the specified {@link RegionFactory}.
@@ -67,7 +67,7 @@ public interface RegionContext<R extends Region> {
      *
      * @see #extend(RegionFactory)
      */
-    RegionBuilder<R, ?> extend( RegionFactory<R> factory, long seed );
+    RegionBuilder<R, ?> extend(RegionFactory<R> factory, long seed);
 
     /**
      * Creates a {@link RegionBuilder} by extending the specified {@link RegionFactory}. The seed is computed from the
@@ -78,8 +78,8 @@ public interface RegionContext<R extends Region> {
      *
      * @see #extend(RegionFactory, long)
      */
-    default RegionBuilder<R, ?> extend( RegionFactory<R> factory ) {
-        return extend( factory, worldSeed() & 0xFFFF );
+    default RegionBuilder<R, ?> extend(RegionFactory<R> factory) {
+        return extend(factory, worldSeed() & 0xFFFF);
     }
 
     /**
@@ -91,8 +91,8 @@ public interface RegionContext<R extends Region> {
      *
      * @see #generate(GeneratorLayer)
      */
-    default RegionBuilder<R, ?> generate( GeneratorLayer layer, long seed ) {
-        return extend( layer.factory( this, seed ), seed );
+    default RegionBuilder<R, ?> generate(GeneratorLayer layer, long seed) {
+        return extend(layer.factory(this, seed), seed);
     }
 
     /**
@@ -104,8 +104,8 @@ public interface RegionContext<R extends Region> {
      *
      * @see #generate(GeneratorLayer, long)
      */
-    default RegionBuilder<R, ?> generate( GeneratorLayer layer ) {
-        return generate( layer, worldSeed() & 0xFFFF );
+    default RegionBuilder<R, ?> generate(GeneratorLayer layer) {
+        return generate(layer, worldSeed() & 0xFFFF);
     }
 
     /**
@@ -119,8 +119,8 @@ public interface RegionContext<R extends Region> {
      *
      * @see #transform(TransformerLayer, RegionFactory)
      */
-    default RegionBuilder<R, ?> transform( TransformerLayer layer, RegionFactory<R> factory, long seed ) {
-        return extend( layer.factory( this, seed, factory ), seed );
+    default RegionBuilder<R, ?> transform(TransformerLayer layer, RegionFactory<R> factory, long seed) {
+        return extend(layer.factory(this, seed, factory), seed);
     }
 
     /**
@@ -133,8 +133,8 @@ public interface RegionContext<R extends Region> {
      *
      * @see #transform(TransformerLayer, RegionFactory, long)
      */
-    default RegionBuilder<R, ?> transform( TransformerLayer layer, RegionFactory<R> factory ) {
-        return transform( layer, factory, worldSeed() & 0xFFFF );
+    default RegionBuilder<R, ?> transform(TransformerLayer layer, RegionFactory<R> factory) {
+        return transform(layer, factory, worldSeed() & 0xFFFF);
     }
 
     /**
@@ -148,8 +148,8 @@ public interface RegionContext<R extends Region> {
      *
      * @see #merge(MergerLayer, RegionFactory, RegionFactory)
      */
-    default RegionBuilder<R, ?> merge( MergerLayer layer, RegionFactory<R> factoryA, RegionFactory<R> factoryB, long seed ) {
-        return extend( layer.factory( this, seed, factoryA, factoryB ), seed );
+    default RegionBuilder<R, ?> merge(MergerLayer layer, RegionFactory<R> factoryA, RegionFactory<R> factoryB, long seed) {
+        return extend(layer.factory(this, seed, factoryA, factoryB), seed);
     }
 
     /**
@@ -163,88 +163,88 @@ public interface RegionContext<R extends Region> {
      *
      * @see #merge(MergerLayer, RegionFactory, RegionFactory, long)
      */
-    default RegionBuilder<R, ?> merge( MergerLayer layer, RegionFactory<R> factoryA, RegionFactory<R> factoryB ) {
-        return merge( layer, factoryA, factoryB, worldSeed() & 0xFFFF );
+    default RegionBuilder<R, ?> merge(MergerLayer layer, RegionFactory<R> factoryA, RegionFactory<R> factoryB) {
+        return merge(layer, factoryA, factoryB, worldSeed() & 0xFFFF);
     }
 
-    default RegionBuilder<R, ?> random( RandomLayer.RandomFunction func, long seed ) {
-        return generate( new RandomLayer( func ), seed );
+    default RegionBuilder<R, ?> random(RandomLayer.RandomFunction func, long seed) {
+        return generate(new RandomLayer(func), seed);
     }
 
-    default RegionBuilder<R, ?> random( RandomLayer.RandomFunction func ) {
-        return generate( new RandomLayer( func ) );
+    default RegionBuilder<R, ?> random(RandomLayer.RandomFunction func) {
+        return generate(new RandomLayer(func));
     }
 
-    default RegionBuilder<R, ?> random( int min, int max, long seed ) {
-        return generate( new RandomLayer( min, max ), seed );
+    default RegionBuilder<R, ?> random(int min, int max, long seed) {
+        return generate(new RandomLayer(min, max), seed);
     }
 
-    default RegionBuilder<R, ?> random( int min, int max ) {
-        return generate( new RandomLayer( min, max ) );
+    default RegionBuilder<R, ?> random(int min, int max) {
+        return generate(new RandomLayer(min, max));
     }
 
 
-    default RegionBuilder<R, ?> randomF( FloatRandomLayer.RandomFunction func, long seed ) {
-        return generate( new FloatRandomLayer( func ), seed );
+    default RegionBuilder<R, ?> randomF(FloatRandomLayer.RandomFunction func, long seed) {
+        return generate(new FloatRandomLayer(func), seed);
     }
 
-    default RegionBuilder<R, ?> randomF( FloatRandomLayer.RandomFunction func ) {
-        return generate( new FloatRandomLayer( func ) );
+    default RegionBuilder<R, ?> randomF(FloatRandomLayer.RandomFunction func) {
+        return generate(new FloatRandomLayer(func));
     }
 
-    default RegionBuilder<R, ?> randomF( float min, float max, long seed ) {
-        return generate( new FloatRandomLayer( min, max ), seed );
+    default RegionBuilder<R, ?> randomF(float min, float max, long seed) {
+        return generate(new FloatRandomLayer(min, max), seed);
     }
 
-    default RegionBuilder<R, ?> randomF( float min, float max ) {
-        return generate( new FloatRandomLayer( min, max ) );
+    default RegionBuilder<R, ?> randomF(float min, float max) {
+        return generate(new FloatRandomLayer(min, max));
     }
 
-    default RegionBuilder<R, ?> binary( double oneChance, long seed ) {
-        return generate( new RandomLayer( oneChance ), seed );
+    default RegionBuilder<R, ?> binary(double oneChance, long seed) {
+        return generate(new RandomLayer(oneChance), seed);
     }
 
-    default RegionBuilder<R, ?> binary( double oneChance ) {
-        return generate( new RandomLayer( oneChance ) );
+    default RegionBuilder<R, ?> binary(double oneChance) {
+        return generate(new RandomLayer(oneChance));
     }
 
-    default RegionBuilder<R, ?> pick( int[] ints, long seed ) {
-        return generate( new RandomLayer( ints ), seed );
+    default RegionBuilder<R, ?> pick(int[] ints, long seed) {
+        return generate(new RandomLayer(ints), seed);
     }
 
-    default RegionBuilder<R, ?> pick( int... ints ) {
-        return generate( new RandomLayer( ints ) );
+    default RegionBuilder<R, ?> pick(int... ints) {
+        return generate(new RandomLayer(ints));
     }
 
-    default RegionBuilder<R, ?> pickF( float[] floats, long seed ) {
-        return generate( new FloatRandomLayer( floats ), seed );
+    default RegionBuilder<R, ?> pickF(float[] floats, long seed) {
+        return generate(new FloatRandomLayer(floats), seed);
     }
 
-    default RegionBuilder<R, ?> pickF( float... floats ) {
-        return generate( new FloatRandomLayer( floats ) );
+    default RegionBuilder<R, ?> pickF(float... floats) {
+        return generate(new FloatRandomLayer(floats));
     }
 
-    default RegionBuilder<R, ?> noise( Noise2D noise, long seed ) {
-        return generate( new NoiseLayer( noise ), seed );
+    default RegionBuilder<R, ?> noise(Noise2D noise, long seed) {
+        return generate(new NoiseLayer(noise), seed);
     }
 
-    default RegionBuilder<R, ?> noise( Noise2D noise ) {
-        return generate( new NoiseLayer( noise ) );
+    default RegionBuilder<R, ?> noise(Noise2D noise) {
+        return generate(new NoiseLayer(noise));
     }
 
-    default RegionBuilder<R, ?> value( int val ) {
-        return generate( new StaticValueLayer( val ) );
+    default RegionBuilder<R, ?> value(int val) {
+        return generate(new StaticValueLayer(val));
     }
 
-    default RegionBuilder<R, ?> valueF( float val ) {
-        return generate( new StaticValueLayer( val ) );
+    default RegionBuilder<R, ?> valueF(float val) {
+        return generate(new StaticValueLayer(val));
     }
 
-    default RegionBuilder<R, ?> value( int val, long seed ) {
-        return generate( new StaticValueLayer( val ) );
+    default RegionBuilder<R, ?> value(int val, long seed) {
+        return generate(new StaticValueLayer(val));
     }
 
-    default RegionBuilder<R, ?> valueF( float val, long seed ) {
-        return generate( new StaticValueLayer( val ) );
+    default RegionBuilder<R, ?> valueF(float val, long seed) {
+        return generate(new StaticValueLayer(val));
     }
 }

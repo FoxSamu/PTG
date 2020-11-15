@@ -10,25 +10,25 @@ import net.shadew.ptg.region.RegionRNG;
 public class FloatRandomLayer implements FloatGeneratorLayer {
     private final RandomFunction function;
 
-    public FloatRandomLayer( RandomFunction function ) {
+    public FloatRandomLayer(RandomFunction function) {
         this.function = function;
     }
 
-    public FloatRandomLayer( float min, float max ) {
-        this( rng -> rng.randomFloat() * ( max - min ) + min );
+    public FloatRandomLayer(float min, float max) {
+        this(rng -> rng.randomFloat() * (max - min) + min);
     }
 
-    public FloatRandomLayer( float[] floats ) {
-        this( rng -> rng.pickRandom( floats ) );
+    public FloatRandomLayer(float[] floats) {
+        this(rng -> rng.pickRandom(floats));
     }
 
     @Override
-    public float generateFP( RegionRNG rng, int x, int z ) {
-        return function.random( rng );
+    public float generateFP(RegionRNG rng, int x, int z) {
+        return function.random(rng);
     }
 
     @FunctionalInterface
     public interface RandomFunction {
-        float random( RegionRNG rng );
+        float random(RegionRNG rng);
     }
 }

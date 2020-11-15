@@ -14,7 +14,7 @@ public class FuzzyZoomLayer extends ZoomLayer {
     }
 
     @Override
-    protected int pickRandom( RegionRNG rng, int v00, int v01, int v10, int v11 ) {
-        return rng.pickRandom( v00, v01, v10, v11 );
+    protected int pickRandom(RegionRNG rng, int v00, int v01, int v10, int v11) {
+        return rng.pickRandom(v00, v01, v10, v11);
     }
 }

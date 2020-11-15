@@ -16,8 +16,8 @@ import net.shadew.ptg.region.Region;
 @FunctionalInterface
 public interface Noise2D {
 
-    default double generateMultiplied( double x, double y, double multiplier ) {
-        return generate( x, y ) * multiplier;
+    default double generateMultiplied(double x, double y, double multiplier) {
+        return generate(x, y) * multiplier;
     }
 
     /**
@@ -27,7 +27,7 @@ public interface Noise2D {
      * @param y The y coordinate
      * @return The generated noise value
      */
-    double generate( double x, double y );
+    double generate(double x, double y);
 
 
     /**
@@ -36,8 +36,8 @@ public interface Noise2D {
      * @param amount The constant value to add
      * @return The created noise generator
      */
-    default Noise2D add( double amount ) {
-        return ( x, y ) -> generate( x, y ) + amount;
+    default Noise2D add(double amount) {
+        return (x, y) -> generate(x, y) + amount;
     }
 
     /**
@@ -46,8 +46,8 @@ public interface Noise2D {
      * @param amount The constant value to subtract
      * @return The created noise generator
      */
-    default Noise2D subtract( double amount ) {
-        return ( x, y ) -> generate( x, y ) - amount;
+    default Noise2D subtract(double amount) {
+        return (x, y) -> generate(x, y) - amount;
     }
 
     /**
@@ -56,8 +56,8 @@ public interface Noise2D {
      * @param amount The constant value to multiply with
      * @return The created noise generator
      */
-    default Noise2D multiply( double amount ) {
-        return ( x, y ) -> generate( x, y ) * amount;
+    default Noise2D multiply(double amount) {
+        return (x, y) -> generate(x, y) * amount;
     }
 
     /**
@@ -66,8 +66,8 @@ public interface Noise2D {
      * @param amount The constant value to divide by
      * @return The created noise generator
      */
-    default Noise2D divide( double amount ) {
-        return ( x, y ) -> generate( x, y ) / amount;
+    default Noise2D divide(double amount) {
+        return (x, y) -> generate(x, y) / amount;
     }
 
 
@@ -78,8 +78,8 @@ public interface Noise2D {
      * @param amount The noise generator that generates noise to add
      * @return The created noise generator
      */
-    default Noise2D add( Noise2D amount ) {
-        return ( x, y ) -> generate( x, y ) + amount.generate( x, y );
+    default Noise2D add(Noise2D amount) {
+        return (x, y) -> generate(x, y) + amount.generate(x, y);
     }
 
     /**
@@ -89,8 +89,8 @@ public interface Noise2D {
      * @param amount The noise generator that generates noise to subtract
      * @return The created noise generator
      */
-    default Noise2D subtract( Noise2D amount ) {
-        return ( x, y ) -> generate( x, y ) - amount.generate( x, y );
+    default Noise2D subtract(Noise2D amount) {
+        return (x, y) -> generate(x, y) - amount.generate(x, y);
     }
 
     /**
@@ -100,8 +100,8 @@ public interface Noise2D {
      * @param amount The noise generator that generates noise to multiply with
      * @return The created noise generator
      */
-    default Noise2D multiply( Noise2D amount ) {
-        return ( x, y ) -> generate( x, y ) * amount.generate( x, y );
+    default Noise2D multiply(Noise2D amount) {
+        return (x, y) -> generate(x, y) * amount.generate(x, y);
     }
 
     /**
@@ -111,8 +111,8 @@ public interface Noise2D {
      * @param amount The noise generator that generates noise to divide by
      * @return The created noise generator
      */
-    default Noise2D divide( Noise2D amount ) {
-        return ( x, y ) -> generate( x, y ) / amount.generate( x, y );
+    default Noise2D divide(Noise2D amount) {
+        return (x, y) -> generate(x, y) / amount.generate(x, y);
     }
 
     /**
@@ -121,7 +121,7 @@ public interface Noise2D {
      * @return The created noise generator
      */
     default Noise2D inverse() {
-        return ( x, y ) -> - generate( x, y );
+        return (x, y) -> -generate(x, y);
     }
 
     /**
@@ -132,8 +132,8 @@ public interface Noise2D {
      * @param max The constant maximum limit
      * @return The created noise generator
      */
-    default Noise2D lerp( double min, double max ) {
-        return ( x, y ) -> NoiseMath.lerp( min, max, ( generate( x, y ) + 1 ) / 2 );
+    default Noise2D lerp(double min, double max) {
+        return (x, y) -> NoiseMath.lerp(min, max, (generate(x, y) + 1) / 2);
     }
 
     /**
@@ -144,8 +144,8 @@ public interface Noise2D {
      * @param max The maximum limit generator
      * @return The created noise generator
      */
-    default Noise2D lerp( Noise2D min, Noise2D max ) {
-        return ( x, y ) -> NoiseMath.lerp( min.generate( x, y ), max.generate( x, y ), ( generate( x, y ) + 1 ) / 2 );
+    default Noise2D lerp(Noise2D min, Noise2D max) {
+        return (x, y) -> NoiseMath.lerp(min.generate(x, y), max.generate(x, y), (generate(x, y) + 1) / 2);
     }
 
     /**
@@ -154,8 +154,8 @@ public interface Noise2D {
      * @param value The value to generate
      * @return The created noise generator
      */
-    static Noise2D constant( double value ) {
-        return ( x, y ) -> value;
+    static Noise2D constant(double value) {
+        return (x, y) -> value;
     }
 
     /**
@@ -165,8 +165,8 @@ public interface Noise2D {
      * @param z     The constant Z coordinate
      * @return The created noise generator
      */
-    static Noise2D from3D( Noise3D noise, double z ) {
-        return ( x, y ) -> noise.generate( x, y, z );
+    static Noise2D from3D(Noise3D noise, double z) {
+        return (x, y) -> noise.generate(x, y, z);
     }
 
     /**
@@ -177,14 +177,14 @@ public interface Noise2D {
      * @param noises   The noise generators to combine
      * @return The created noise generator
      */
-    static Noise2D combine( DoubleFunction combiner, Noise2D... noises ) {
-        return ( x, y ) -> {
-            double[] arr = new double[ noises.length ];
+    static Noise2D combine(DoubleFunction combiner, Noise2D... noises) {
+        return (x, y) -> {
+            double[] arr = new double[noises.length];
             int i = 0;
-            for( Noise2D noise : noises ) {
-                arr[ i ] = noise.generate( x, y );
+            for (Noise2D noise : noises) {
+                arr[i] = noise.generate(x, y);
             }
-            return combiner.combine( arr );
+            return combiner.combine(arr);
         };
     }
 
@@ -194,8 +194,8 @@ public interface Noise2D {
      * @param scale The scaling of the noise field for every coordinate.
      * @return The created noise generator
      */
-    default Noise2D scale( double scale ) {
-        return ( x, y ) -> generate( x * scale, y * scale );
+    default Noise2D scale(double scale) {
+        return (x, y) -> generate(x * scale, y * scale);
     }
 
     /**
@@ -205,8 +205,8 @@ public interface Noise2D {
      * @param y The scaling of the noise field for the Y coordinate.
      * @return The created noise generator
      */
-    default Noise2D scale( double x, double y ) {
-        return ( x1, y1 ) -> generate( x1 * x, y1 * y );
+    default Noise2D scale(double x, double y) {
+        return (x1, y1) -> generate(x1 * x, y1 * y);
     }
 
     /**
@@ -216,8 +216,8 @@ public interface Noise2D {
      * @param y The translation of the noise field along the Y coordinate.
      * @return The created noise generator
      */
-    default Noise2D translate( double x, double y ) {
-        return ( x1, y1 ) -> generate( x1 + x, y1 + y );
+    default Noise2D translate(double x, double y) {
+        return (x1, y1) -> generate(x1 + x, y1 + y);
     }
 
     /**
@@ -226,7 +226,7 @@ public interface Noise2D {
      * @param octaves The amount of octaves
      * @return The created noise generator
      */
-    default Noise2D fractal( int octaves ) {
+    default Noise2D fractal(int octaves) {
         return (x, y) -> {
             double n = 0;
             double m = 1;
@@ -268,7 +268,7 @@ public interface Noise2D {
      * @param region The region to generate with
      * @return The created noise generator
      */
-    static Noise2D region( Region region ) {
-        return ( x, y ) -> region.getFPValue( NoiseMath.floorI( x ), NoiseMath.floorI( y ) );
+    static Noise2D region(Region region) {
+        return (x, y) -> region.getFPValue(NoiseMath.floorI(x), NoiseMath.floorI(y));
     }
 }

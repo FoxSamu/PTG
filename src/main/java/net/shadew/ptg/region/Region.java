@@ -20,7 +20,7 @@ public interface Region {
      * @param z The Z coordinate
      * @return The value at the coordinates.
      */
-    int getValue( int x, int z );
+    int getValue(int x, int z);
 
     /**
      * Gets the value for the specified coordinates by either computing it or reading it from cache, and returns it as a
@@ -30,7 +30,7 @@ public interface Region {
      * @param z The Z coordinate
      * @return The floating point value at the coordinates.
      */
-    default float getFPValue( int x, int z ) {
-        return Float.intBitsToFloat( getValue( x, z ) );
+    default float getFPValue(int x, int z) {
+        return Float.intBitsToFloat(getValue(x, z));
     }
 }

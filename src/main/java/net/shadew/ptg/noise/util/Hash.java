@@ -27,7 +27,7 @@ public final class Hash {
      */
     public static double hash1D(int seed, int x) {
         int hash = seed;
-        if(x < 0) x = Integer.MAX_VALUE + x;
+        if (x < 0) x = Integer.MAX_VALUE + x;
         hash ^= X_PRIME * x;
 
         hash *= hash * hash * 60493;
@@ -46,8 +46,8 @@ public final class Hash {
      */
     public static double hash2D(int seed, int x, int y) {
         int hash = seed;
-        if(x < 0) x = Integer.MAX_VALUE + x;
-        if(y < 0) y = Integer.MAX_VALUE + y;
+        if (x < 0) x = Integer.MAX_VALUE + x;
+        if (y < 0) y = Integer.MAX_VALUE + y;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
 
@@ -68,9 +68,9 @@ public final class Hash {
      */
     public static double hash3D(int seed, int x, int y, int z) {
         int hash = seed;
-        if(x < 0) x = Integer.MAX_VALUE + x;
-        if(y < 0) y = Integer.MAX_VALUE + y;
-        if(z < 0) z = Integer.MAX_VALUE + z;
+        if (x < 0) x = Integer.MAX_VALUE + x;
+        if (y < 0) y = Integer.MAX_VALUE + y;
+        if (z < 0) z = Integer.MAX_VALUE + z;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
@@ -93,10 +93,10 @@ public final class Hash {
      */
     public static double hash4D(int seed, int x, int y, int z, int w) {
         int hash = seed;
-        if(x < 0) x = Integer.MAX_VALUE + x;
-        if(y < 0) y = Integer.MAX_VALUE + y;
-        if(z < 0) z = Integer.MAX_VALUE + z;
-        if(w < 0) w = Integer.MAX_VALUE + w;
+        if (x < 0) x = Integer.MAX_VALUE + x;
+        if (y < 0) y = Integer.MAX_VALUE + y;
+        if (z < 0) z = Integer.MAX_VALUE + z;
+        if (w < 0) w = Integer.MAX_VALUE + w;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
@@ -117,7 +117,7 @@ public final class Hash {
      */
     public static int hash1I(int seed, int x) {
         int hash = seed;
-        if(x < 0) x = Integer.MAX_VALUE + x;
+        if (x < 0) x = Integer.MAX_VALUE + x;
         hash ^= X_PRIME * x;
 
         hash *= hash * hash * 60493;
@@ -136,8 +136,8 @@ public final class Hash {
      */
     public static int hash2I(int seed, int x, int y) {
         int hash = seed;
-        if(x < 0) x = Integer.MAX_VALUE + x;
-        if(y < 0) y = Integer.MAX_VALUE + y;
+        if (x < 0) x = Integer.MAX_VALUE + x;
+        if (y < 0) y = Integer.MAX_VALUE + y;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
 
@@ -158,9 +158,9 @@ public final class Hash {
      */
     public static int hash3I(int seed, int x, int y, int z) {
         int hash = seed;
-        if(x < 0) x = Integer.MAX_VALUE + x;
-        if(y < 0) y = Integer.MAX_VALUE + y;
-        if(z < 0) z = Integer.MAX_VALUE + z;
+        if (x < 0) x = Integer.MAX_VALUE + x;
+        if (y < 0) y = Integer.MAX_VALUE + y;
+        if (z < 0) z = Integer.MAX_VALUE + z;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;
@@ -183,10 +183,10 @@ public final class Hash {
      */
     public static int hash4I(int seed, int x, int y, int z, int w) {
         int hash = seed;
-        if(x < 0) x = Integer.MAX_VALUE + x;
-        if(y < 0) y = Integer.MAX_VALUE + y;
-        if(z < 0) z = Integer.MAX_VALUE + z;
-        if(w < 0) w = Integer.MAX_VALUE + w;
+        if (x < 0) x = Integer.MAX_VALUE + x;
+        if (y < 0) y = Integer.MAX_VALUE + y;
+        if (z < 0) z = Integer.MAX_VALUE + z;
+        if (w < 0) w = Integer.MAX_VALUE + w;
         hash ^= X_PRIME * x;
         hash ^= Y_PRIME * y;
         hash ^= Z_PRIME * z;

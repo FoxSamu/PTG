@@ -19,7 +19,7 @@ public class StaticValueLayer implements GeneratorLayer {
     }
 
     @Override
-    public int generate( RegionRNG rng, int x, int z ) {
+    public int generate(RegionRNG rng, int x, int z) {
         return value;
     }
 }

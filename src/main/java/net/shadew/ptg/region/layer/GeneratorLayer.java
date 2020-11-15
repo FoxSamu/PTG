@@ -12,12 +12,12 @@ import net.shadew.ptg.region.RegionRNG;
 
 @FunctionalInterface
 public interface GeneratorLayer {
-    int generate( RegionRNG rng, int x, int z );
+    int generate(RegionRNG rng, int x, int z);
 
-    default <R extends Region> RegionFactory<R> factory( RegionContext<R> ctx, long seed ) {
+    default <R extends Region> RegionFactory<R> factory(RegionContext<R> ctx, long seed) {
         return () -> {
-            RegionRNG rng = ctx.getRNG( seed );
-            return ctx.create( ( x, z ) -> generate( rng.position( x, z ), x, z ) );
+            RegionRNG rng = ctx.getRNG(seed);
+            return ctx.create((x, z) -> generate(rng.position(x, z), x, z));
         };
     }
 }

@@ -6,9 +6,9 @@
 package net.shadew.ptg.region;
 
 
-import net.shadew.ptg.rng.LongScrambler;
-
 import java.util.function.Function;
+
+import net.shadew.ptg.rng.LongScrambler;
 
 /**
  * A builder for {@link LazyRegion}s, managed by a {@link LazyRegionContext}.
@@ -85,7 +85,7 @@ public class LazyRegionBuilder implements RegionBuilder<LazyRegion, LazyRegionBu
     @Override
     public long nextSeed() {
         long out = seed;
-        seed = DEFAULT_SCRAMBLER.scramble( seed );
+        seed = DEFAULT_SCRAMBLER.scramble(seed);
         return out;
     }
 }

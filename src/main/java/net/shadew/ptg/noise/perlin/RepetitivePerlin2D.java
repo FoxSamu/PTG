@@ -5,8 +5,8 @@
 
 package net.shadew.ptg.noise.perlin;
 
-import net.shadew.ptg.noise.util.Hash;
 import net.shadew.ptg.noise.RepetitiveNoise2D;
+import net.shadew.ptg.noise.util.Hash;
 
 /**
  * 2D Perlin noise generator.
@@ -18,8 +18,8 @@ public class RepetitivePerlin2D extends RepetitiveNoise2D {
      *
      * @param seed The seed, may be any {@link int}
      */
-    public RepetitivePerlin2D( int seed, int repeat ) {
-        super( seed, repeat );
+    public RepetitivePerlin2D(int seed, int repeat) {
+        super(seed, repeat);
     }
 
     /**
@@ -28,8 +28,8 @@ public class RepetitivePerlin2D extends RepetitiveNoise2D {
      * @param seed  The seed, may be any {@link int}
      * @param scale The coordinate scaling along all axes
      */
-    public RepetitivePerlin2D( int seed, double scale, int repeat ) {
-        super( seed, scale, repeat );
+    public RepetitivePerlin2D(int seed, double scale, int repeat) {
+        super(seed, scale, repeat);
     }
 
     /**

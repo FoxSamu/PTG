@@ -11,9 +11,9 @@ import net.shadew.ptg.region.RegionRNG;
 @FunctionalInterface
 public interface FilterMergerLayer extends MergerLayer {
     @Override
-    default int generate( RegionRNG rng, Region regionA, Region regionB, int x, int z ) {
-        return generate( rng, regionA.getValue( x, z ), regionB.getValue( x, z ) );
+    default int generate(RegionRNG rng, Region regionA, Region regionB, int x, int z) {
+        return generate(rng, regionA.getValue(x, z), regionB.getValue(x, z));
     }
 
-    int generate( RegionRNG rng, int a, int b );
+    int generate(RegionRNG rng, int a, int b);
 }

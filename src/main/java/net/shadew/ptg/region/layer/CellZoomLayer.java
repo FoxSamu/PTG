@@ -14,12 +14,12 @@ public class CellZoomLayer extends ZoomLayer {
     }
 
     @Override
-    protected int pickRandom( RegionRNG rng, int v00, int v01, int v10, int v11 ) {
+    protected int pickRandom(RegionRNG rng, int v00, int v01, int v10, int v11) {
         return v00;
     }
 
     @Override
-    protected int pickRandom( RegionRNG rng, int a, int b ) {
+    protected int pickRandom(RegionRNG rng, int a, int b) {
         return a;
     }
 }

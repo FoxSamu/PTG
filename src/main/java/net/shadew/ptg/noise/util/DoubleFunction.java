@@ -21,5 +21,5 @@ public interface DoubleFunction {
      * @param doubles The double values to combine using the specific function
      * @return The result value
      */
-    double combine( double... doubles );
+    double combine(double... doubles);
 }

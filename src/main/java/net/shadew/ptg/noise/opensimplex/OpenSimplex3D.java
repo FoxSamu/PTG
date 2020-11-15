@@ -7,7 +7,6 @@ package net.shadew.ptg.noise.opensimplex;
 
 import net.shadew.ptg.noise.BaseNoise3D;
 import net.shadew.ptg.noise.util.Hash;
-import net.shadew.ptg.noise.util.NoiseMath;
 
 /**
  * 3D OpenSimplex noise generator based on an

@@ -14,8 +14,8 @@ public abstract class FractalGenerator<T> {
      * @param region The fractal generator ({@link Region}).
      * @throws NullPointerException When the argument is null.
      */
-    public FractalGenerator( Region region ) {
-        if( region == null ) throw new NullPointerException();
+    public FractalGenerator(Region region) {
+        if (region == null) throw new NullPointerException();
         this.region = region;
     }
 
@@ -25,8 +25,8 @@ public abstract class FractalGenerator<T> {
      * @param factory The fractal generator factory ({@link RegionFactory}).
      * @throws NullPointerException When the argument is null.
      */
-    public FractalGenerator( RegionFactory<?> factory ) {
-        if( factory == null ) throw new NullPointerException();
+    public FractalGenerator(RegionFactory<?> factory) {
+        if (factory == null) throw new NullPointerException();
         this.region = factory.buildRegion();
     }
 
@@ -36,7 +36,7 @@ public abstract class FractalGenerator<T> {
      * @param id The ID, which is the value returned by a {@linkplain Region region}
      * @return The looked up value.
      */
-    protected abstract T toValue( int id );
+    protected abstract T toValue(int id);
 
     /**
      * Create an array of the generic fractal type.
@@ -44,7 +44,7 @@ public abstract class FractalGenerator<T> {
      * @param size The array size.
      * @return An array of the specified size.
      */
-    protected abstract T[] createArray( int size );
+    protected abstract T[] createArray(int size);
 
 
     /**
@@ -54,9 +54,9 @@ public abstract class FractalGenerator<T> {
      * @param z Z coordinate
      * @return The value at this coords
      */
-    public T generate( int x, int z ) {
-        int biome = region.getValue( x, z );
-        return toValue( biome );
+    public T generate(int x, int z) {
+        int biome = region.getValue(x, z);
+        return toValue(biome);
     }
 
     /**
@@ -68,8 +68,8 @@ public abstract class FractalGenerator<T> {
      * @param zSize The region size along Z-axis
      * @return The generated data in the region.
      */
-    public T[] generate( int x, int z, int xSize, int zSize ) {
-        return generate( null, x, z, xSize, zSize );
+    public T[] generate(int x, int z, int xSize, int zSize) {
+        return generate(null, x, z, xSize, zSize);
     }
 
     /**
@@ -84,14 +84,14 @@ public abstract class FractalGenerator<T> {
      * @return The used array filled with data for the region. This may or may not the same instance as the specified
      *     array.
      */
-    public T[] generate( T[] data, int x, int z, int xSize, int zSize ) {
-        if( data == null || data.length < xSize * zSize ) {
-            data = createArray( xSize * zSize );
+    public T[] generate(T[] data, int x, int z, int xSize, int zSize) {
+        if (data == null || data.length < xSize * zSize) {
+            data = createArray(xSize * zSize);
         }
 
-        for( int ix = 0; ix < xSize; ix++ ) {
-            for( int iz = 0; iz < zSize; iz++ ) {
-                data[ iz * xSize + ix ] = generate( ix + x, iz + z );
+        for (int ix = 0; ix < xSize; ix++) {
+            for (int iz = 0; iz < zSize; iz++) {
+                data[iz * xSize + ix] = generate(ix + x, iz + z);
             }
         }
 

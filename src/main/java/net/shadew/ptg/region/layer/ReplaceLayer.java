@@ -18,23 +18,23 @@ public class ReplaceLayer implements FilterTransformerLayer {
         this.replacement = replacement;
     }
 
-    public ReplaceLayer( FloatSelector selector, float replacement ) {
-        this.selector = val -> selector.mustReplace( Float.intBitsToFloat( val ) );
-        this.replacement = Float.floatToRawIntBits( replacement );
+    public ReplaceLayer(FloatSelector selector, float replacement) {
+        this.selector = val -> selector.mustReplace(Float.intBitsToFloat(val));
+        this.replacement = Float.floatToRawIntBits(replacement);
     }
 
-    public ReplaceLayer( int selector, int replacement ) {
+    public ReplaceLayer(int selector, int replacement) {
         this.selector = val -> val == selector;
         this.replacement = replacement;
     }
 
-    public ReplaceLayer( float selector, float replacement ) {
-        this.selector = val -> Float.intBitsToFloat( val ) == selector;
-        this.replacement = Float.floatToRawIntBits( replacement );
+    public ReplaceLayer(float selector, float replacement) {
+        this.selector = val -> Float.intBitsToFloat(val) == selector;
+        this.replacement = Float.floatToRawIntBits(replacement);
     }
 
     @Override
-    public int generate( RegionRNG rng, int value ) {
-        return selector.mustReplace( value ) ? replacement : value;
+    public int generate(RegionRNG rng, int value) {
+        return selector.mustReplace(value) ? replacement : value;
     }
 }

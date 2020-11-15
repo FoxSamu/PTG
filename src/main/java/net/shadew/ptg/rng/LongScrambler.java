@@ -23,7 +23,7 @@ public interface LongScrambler {
      * @param seed The input value: a 'seed'.
      * @return The output value.
      */
-    long scramble( long seed );
+    long scramble(long seed);
 
     /**
      * Creates a basic linear congruential (LGC) scrambler:
@@ -33,58 +33,58 @@ public interface LongScrambler {
      * @param mul The multiplier constant.
      * @return A LGC long scrambler
      */
-    static LongScrambler lgc( long add, long mul ) {
+    static LongScrambler lgc(long add, long mul) {
         return seed -> seed * mul + add;
     }
 
-    static LongScrambler xorshift( int... leftShifts ) {
-        if( leftShifts == null || leftShifts.length == 0 ) throw new IllegalArgumentException();
+    static LongScrambler xorshift(int... leftShifts) {
+        if (leftShifts == null || leftShifts.length == 0) throw new IllegalArgumentException();
         return seed -> {
-            for( int ls : leftShifts ) {
-                if( ls < 0 ) seed ^= seed >> - ls;
+            for (int ls : leftShifts) {
+                if (ls < 0) seed ^= seed >> -ls;
                 else seed ^= seed << ls;
             }
             return seed;
         };
     }
 
-    static LongScrambler xorshift( long... seeds ) {
-        if( seeds == null || seeds.length == 0 ) throw new IllegalArgumentException();
-        int[] intSeeds = new int[ seeds.length * 8 ];
+    static LongScrambler xorshift(long... seeds) {
+        if (seeds == null || seeds.length == 0) throw new IllegalArgumentException();
+        int[] intSeeds = new int[seeds.length * 8];
         int count = 0;
-        for( long seed : seeds ) {
-            int a = (int) ( seed & 0xFFFFL );
-            int b = (int) ( seed >>> 16 & 0xFFFFL );
-            int c = (int) ( seed >>> 32 & 0xFFFFL );
-            int d = (int) ( seed >>> 48 & 0xFFFFL );
-            if( a != 0 ) {
-                intSeeds[ count ] = a;
+        for (long seed : seeds) {
+            int a = (int) (seed & 0xFFFFL);
+            int b = (int) (seed >>> 16 & 0xFFFFL);
+            int c = (int) (seed >>> 32 & 0xFFFFL);
+            int d = (int) (seed >>> 48 & 0xFFFFL);
+            if (a != 0) {
+                intSeeds[count] = a;
                 count++;
             }
-            if( b != 0 ) {
-                intSeeds[ count ] = b;
+            if (b != 0) {
+                intSeeds[count] = b;
                 count++;
             }
-            if( c != 0 ) {
-                intSeeds[ count ] = c;
+            if (c != 0) {
+                intSeeds[count] = c;
                 count++;
             }
-            if( d != 0 ) {
-                intSeeds[ count ] = d;
+            if (d != 0) {
+                intSeeds[count] = d;
                 count++;
             }
         }
 
-        int[] shifts = new int[ count ];
+        int[] shifts = new int[count];
         int sign = 1;
-        for( int i = 0; i < count; i++ ) {
-            int seed = intSeeds[ i ];
-            sign = - sign;
+        for (int i = 0; i < count; i++) {
+            int seed = intSeeds[i];
+            sign = -sign;
             int index = seed % PrimeNumbers.RANDOM_PRIMES.length;
-            shifts[ i ] = sign * PrimeNumbers.RANDOM_PRIMES[ index ];
+            shifts[i] = sign * PrimeNumbers.RANDOM_PRIMES[index];
         }
 
-        return xorshift( shifts );
+        return xorshift(shifts);
     }
 
     /**
@@ -99,14 +99,14 @@ public interface LongScrambler {
      *
      * @throws IllegalArgumentException Thrown when the passed seeds array is null or empty.
      */
-    static LongScrambler hash( int shift, long lgcAdd, long... seeds ) {
-        if( seeds == null || seeds.length == 0 ) throw new IllegalArgumentException();
-        long initLGCMulMask = ( 1L << shift ) - 1;
+    static LongScrambler hash(int shift, long lgcAdd, long... seeds) {
+        if (seeds == null || seeds.length == 0) throw new IllegalArgumentException();
+        long initLGCMulMask = (1L << shift) - 1;
         return seed -> {
-            long lgcMul = ~ seeds[ 0 ] & initLGCMulMask;
-            for( long s : seeds ) {
+            long lgcMul = ~seeds[0] & initLGCMulMask;
+            for (long s : seeds) {
                 // Shift size
-                int sh = (int) ( seed % shift );
+                int sh = (int) (seed % shift);
 
                 // Compute the lost bits by shifting left and right.
                 long lost = seed << sh >>> sh;
@@ -116,8 +116,8 @@ public interface LongScrambler {
                 seed >>= sh;
                 seed ^= s;
 
-                if( ( seed & 1 ) == 0 ) {
-                    seed = ~ seed;
+                if ((seed & 1) == 0) {
+                    seed = ~seed;
                 }
 
                 seed ^= lost;
@@ -126,7 +126,7 @@ public interface LongScrambler {
         };
     }
 
-    default LongScrambler masked( long mask ) {
-        return s -> scramble( s ) & mask;
+    default LongScrambler masked(long mask) {
+        return s -> scramble(s) & mask;
     }
 }
