@@ -53,6 +53,6 @@ public class OpenSimplex2D extends BaseNoise2D {
         x /= scaleX;
         y /= scaleY;
 
-        return OpenSimplex.compute(x, y, this::hash);
+        return OpenSimplex.compute(x / 2, y / 2, this::hash);
     }
 }

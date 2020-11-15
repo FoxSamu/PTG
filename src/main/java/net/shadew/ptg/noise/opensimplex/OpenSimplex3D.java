@@ -55,6 +55,6 @@ public class OpenSimplex3D extends BaseNoise3D {
         y /= scaleY;
         z /= scaleZ;
 
-        return OpenSimplex.compute(x, y, z, this::hash);
+        return OpenSimplex.compute(x / 2, y / 2, z / 2, this::hash);
     }
 }
