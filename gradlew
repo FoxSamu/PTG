@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 #
-# Copyright (c) 2020 RGSW
+# Copyright (c) 2023 Runefox Dev
 # Licensed under Apache 2.0 license
 #
 

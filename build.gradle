@@ -1,15 +1,16 @@
 /*
- * Copyright (c) 2020 RGSW
+ * Copyright (c) 2023 RunefoxDev
  * Licensed under Apache 2.0 license
  */
 
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'signing'
 }
 
-group 'net.shadew'
-version '2.0.0'
+group 'dev.runefox'
+version '3.0'
 
 sourceCompatibility = 1.8
 
@@ -29,7 +30,7 @@ dependencies {
 
 publishing {
     publications {
-        maven( MavenPublication ) {
+        maven (MavenPublication) {
             groupId = project.group
             artifactId = 'ptg'
             version = project.version
@@ -41,11 +42,15 @@ publishing {
     repositories {
         maven {
             name = "ShwMaven"
-            url = uri( "http://maven.shadew.net/" )
+            url = uri( "https://maven.shadew.net/" )
             credentials {
                 username = shwMavenUser
                 password = shwMavenPass
             }
         }
     }
+}
+
+signing {
+    sign publishing.publications.maven
 }
