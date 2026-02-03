@@ -32,6 +32,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
+// Used to render images used in wiki
 public final class NoiseExport {
     private NoiseExport() {
     }
