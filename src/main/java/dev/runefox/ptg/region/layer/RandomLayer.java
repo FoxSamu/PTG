@@ -23,7 +23,7 @@ public class RandomLayer implements GeneratorLayer {
     }
 
     public RandomLayer(int min, int max) {
-        this(rng -> rng.random(max - min + 1) + min);
+        this(rng -> rng.nextInt(max - min + 1) + min);
     }
 
     public RandomLayer(int[] ints) {
@@ -31,7 +31,7 @@ public class RandomLayer implements GeneratorLayer {
     }
 
     public RandomLayer(double oneChance) {
-        this(rng -> rng.randomDouble() < oneChance ? 1 : 0);
+        this(rng -> rng.nextDouble() < oneChance ? 1 : 0);
     }
 
     @Override

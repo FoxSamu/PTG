@@ -24,11 +24,11 @@ public interface MergerLayer {
 
     default <R extends Region> RegionFactory<R> factory(RegionContext<R> ctx, long seed, RegionFactory<R> regionFactoryA, RegionFactory<R> regionFactoryB) {
         return () -> {
-            RegionRNG rng = ctx.getRNG(seed);
+            ThreadLocal<RegionRNG> rng = ctx.getThreadLocalRNG(seed);
             R regionA = regionFactoryA.buildRegion();
             R regionB = regionFactoryB.buildRegion();
             return ctx.create(
-                (x, z) -> generate(rng.position(x, z), regionA, regionB, x, z),
+                (x, z) -> generate(rng.get().seedFromPosition(x, z), regionA, regionB, x, z),
                 regionA, regionB
             );
         };

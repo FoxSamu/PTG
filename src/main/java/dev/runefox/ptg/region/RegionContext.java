@@ -62,10 +62,22 @@ public interface RegionContext<R extends Region> {
     /**
      * Creates a {@linkplain RegionRNG fast random number generator} instance for the specified seed.
      *
-     * @param seed The seed for this instance.
+     * @param seed The seed.
      * @return The created {@link RegionRNG} instance.
      */
     RegionRNG getRNG(long seed);
+
+
+    /**
+     * Creates a {@link ThreadLocal} supplying {@linkplain RegionRNG fast random number generator} instances
+     * for the specified seed.
+     *
+     * @param seed The seed.
+     * @return The created {@link ThreadLocal} instance supplying {@link RegionRNG} per thread.
+     */
+    default ThreadLocal<RegionRNG> getThreadLocalRNG(long seed) {
+        return ThreadLocal.withInitial(() -> getRNG(seed));
+    }
 
     /**
      * Creates a {@link RegionBuilder} by extending the specified {@link RegionFactory}.
@@ -88,7 +100,7 @@ public interface RegionContext<R extends Region> {
      * @see #extend(RegionFactory, long)
      */
     default RegionBuilder<R, ?> extend(RegionFactory<R> factory) {
-        return extend(factory, worldSeed() & 0xFFFF);
+        return extend(factory, worldSeed());
     }
 
     /**
@@ -114,7 +126,7 @@ public interface RegionContext<R extends Region> {
      * @see #generate(GeneratorLayer, long)
      */
     default RegionBuilder<R, ?> generate(GeneratorLayer layer) {
-        return generate(layer, worldSeed() & 0xFFFF);
+        return generate(layer, worldSeed());
     }
 
     /**
@@ -143,7 +155,7 @@ public interface RegionContext<R extends Region> {
      * @see #transform(TransformerLayer, RegionFactory, long)
      */
     default RegionBuilder<R, ?> transform(TransformerLayer layer, RegionFactory<R> factory) {
-        return transform(layer, factory, worldSeed() & 0xFFFF);
+        return transform(layer, factory, worldSeed());
     }
 
     /**
@@ -173,7 +185,7 @@ public interface RegionContext<R extends Region> {
      * @see #merge(MergerLayer, RegionFactory, RegionFactory, long)
      */
     default RegionBuilder<R, ?> merge(MergerLayer layer, RegionFactory<R> factoryA, RegionFactory<R> factoryB) {
-        return merge(layer, factoryA, factoryB, worldSeed() & 0xFFFF);
+        return merge(layer, factoryA, factoryB, worldSeed());
     }
 
     default RegionBuilder<R, ?> random(RandomLayer.RandomFunction func, long seed) {

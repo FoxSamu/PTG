@@ -48,6 +48,6 @@ public interface EdgeTransformerLayer extends CastleTransformerLayer {
     int getEdge(RegionRNG rng, int center, int neighbor);
 
     default int mixEdges(RegionRNG rng, int[] edges, int count) {
-        return edges[rng.random(count)];
+        return edges[rng.nextInt(count)];
     }
 }

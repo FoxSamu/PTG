@@ -33,19 +33,19 @@ public class VoronoiZoomLayer implements TransformerLayer {
         int ux = lx + 4;
         int uz = lz + 4;
 
-        rng.setPosition(lx, lz);
+        rng.seedFromPosition(lx, lz);
         double point00X = randomPointCoord(rng);
         double point00Z = randomPointCoord(rng);
 
-        rng.setPosition(ux, lz);
+        rng.seedFromPosition(ux, lz);
         double point10X = randomPointCoord(rng) + 4;
         double point10Z = randomPointCoord(rng);
 
-        rng.setPosition(lx, uz);
+        rng.seedFromPosition(lx, uz);
         double point01X = randomPointCoord(rng);
         double point01Z = randomPointCoord(rng) + 4;
 
-        rng.setPosition(ux, uz);
+        rng.seedFromPosition(ux, uz);
         double point11X = randomPointCoord(rng) + 4;
         double point11Z = randomPointCoord(rng) + 4;
 
@@ -79,6 +79,6 @@ public class VoronoiZoomLayer implements TransformerLayer {
     }
 
     private static double randomPointCoord(RegionRNG rng) {
-        return (rng.random(1024) / 1024D - 0.5) * 3.6;
+        return (rng.nextInt(1024) / 1024D - 0.5) * 3.6;
     }
 }

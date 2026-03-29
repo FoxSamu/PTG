@@ -14,24 +14,19 @@
 package dev.runefox.ptg.region;
 
 
-import dev.runefox.ptg.rng.LongScrambler;
-
 import java.util.function.Function;
 
 /**
  * A builder for {@link LazyRegion}s, managed by a {@link LazyRegionContext}.
  */
 public class LazyRegionBuilder implements RegionBuilder<LazyRegion, LazyRegionBuilder> {
-    /** A default seed scrambler to compute a series of seeds for each applied transformation. */
-    private static final LongScrambler DEFAULT_SCRAMBLER = LongScrambler.xorshift(13, -17, 5, -23, 19, -7).masked(0xFFFFL);
-
     /** The managing region context. */
     private final LazyRegionContext context;
 
     /** The built {@link RegionFactory} chain. */
     private RegionFactory<LazyRegion> factory;
 
-    /** The current seed, which is scrambled by {@link #DEFAULT_SCRAMBLER} to create a series of random seeds. */
+    /** The current seed, which is scrambled by {@link #scramble} to create a series of random seeds. */
     private long seed;
 
     /**
@@ -50,7 +45,7 @@ public class LazyRegionBuilder implements RegionBuilder<LazyRegion, LazyRegionBu
     LazyRegionBuilder(LazyRegionContext context, RegionFactory<LazyRegion> root, long rootSeed) {
         this.context = context;
         this.factory = root;
-        this.seed = DEFAULT_SCRAMBLER.scramble(rootSeed);
+        this.seed = scramble(rootSeed);
     }
 
     /**
@@ -93,7 +88,17 @@ public class LazyRegionBuilder implements RegionBuilder<LazyRegion, LazyRegionBu
     @Override
     public long nextSeed() {
         long out = seed;
-        seed = DEFAULT_SCRAMBLER.scramble(seed);
+        seed = scramble(seed);
         return out;
+    }
+
+    private static long scramble(long seed) {
+        seed ^= seed << 13;
+        seed ^= seed >>> 17;
+        seed ^= seed << 5;
+        seed ^= seed >>> 23;
+        seed ^= seed << 19;
+        seed ^= seed >>> 7;
+        return seed;
     }
 }

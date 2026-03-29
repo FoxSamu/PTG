@@ -24,8 +24,8 @@ public interface GeneratorLayer {
 
     default <R extends Region> RegionFactory<R> factory(RegionContext<R> ctx, long seed) {
         return () -> {
-            RegionRNG rng = ctx.getRNG(seed);
-            return ctx.create((x, z) -> generate(rng.position(x, z), x, z));
+            ThreadLocal<RegionRNG> rng = ctx.getThreadLocalRNG(seed);
+            return ctx.create((x, z) -> generate(rng.get().seedFromPosition(x, z), x, z));
         };
     }
 }

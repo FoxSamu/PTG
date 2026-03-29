@@ -115,7 +115,7 @@ public class LazyRegionContext implements RegionContext<LazyRegion> {
      */
     @Override
     public RegionRNG getRNG(long seed) {
-        return new LinearCongruentialRNG(worldSeed, seed);
+        return new RegionLCG(worldSeed, seed);
     }
 
     /**

@@ -23,7 +23,7 @@ public class FloatRandomLayer implements FloatGeneratorLayer {
     }
 
     public FloatRandomLayer(float min, float max) {
-        this(rng -> rng.randomFloat() * (max - min) + min);
+        this(rng -> rng.nextFloat() * (max - min) + min);
     }
 
     public FloatRandomLayer(float[] floats) {

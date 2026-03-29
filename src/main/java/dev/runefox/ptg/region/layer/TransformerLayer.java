@@ -24,9 +24,9 @@ public interface TransformerLayer {
 
     default <R extends Region> RegionFactory<R> factory(RegionContext<R> ctx, long seed, RegionFactory<R> regionFactory) {
         return () -> {
-            RegionRNG rng = ctx.getRNG(seed);
+            ThreadLocal<RegionRNG> rng = ctx.getThreadLocalRNG(seed);
             R region = regionFactory.buildRegion();
-            return ctx.create((x, z) -> generate(rng.position(x, z), region, x, z), region);
+            return ctx.create((x, z) -> generate(rng.get().seedFromPosition(x, z), region, x, z), region);
         };
     }
 }

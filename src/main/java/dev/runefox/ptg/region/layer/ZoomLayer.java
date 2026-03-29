@@ -35,7 +35,7 @@ public class ZoomLayer implements TransformerLayer {
         int sx = x & 1;
         int sz = z & 1;
 
-        rng.setPosition(x >> 1 << 1, z >> 1 << 1);
+        rng.seedFromPosition(x >> 1 << 1, z >> 1 << 1);
 
         // +   +
         //
