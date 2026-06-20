@@ -20,7 +20,7 @@ repositories {
 }
 
 dependencies {
-    implementation("dev.runefox:ptg:1.1")
+    implementation("dev.runefox:ptg:1.1.1")
 }
 ```
 The latest version depends on the Fastutil library, version 8.2.1. This dependency is automatically included with the PTG library, but this requires that the Maven Central Repository is declared as a repository in your buildscript.
