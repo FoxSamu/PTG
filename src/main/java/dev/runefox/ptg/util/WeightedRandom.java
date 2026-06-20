@@ -6,7 +6,9 @@ import java.util.function.ToIntFunction;
 import java.util.random.RandomGenerator;
 
 import dev.runefox.ptg.rng.RNG;
+import it.unimi.dsi.fastutil.objects.Object2IntLinkedOpenHashMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import it.unimi.dsi.fastutil.objects.Object2IntMaps;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
 
 /**
@@ -20,10 +22,11 @@ public class WeightedRandom<T> {
     private final Map<T, Integer> weights;
     private final Selector selector;
 
-    private WeightedRandom(int totalWeight, int weightGcd, List<Weighted<T>> elements, Map<T, Integer> weights, Selector selector) {
+    @SuppressWarnings("rawtypes")
+    private WeightedRandom(int totalWeight, int weightGcd, List<Weighted<? extends T>> elements, Map<T, Integer> weights, Selector selector) {
         this.totalWeight = totalWeight;
         this.weightGcd = weightGcd;
-        this.elements = elements;
+        this.elements = (List<Weighted<T>>) (List) elements;
         this.weights = weights;
         this.selector = selector;
     }
@@ -413,7 +416,7 @@ public class WeightedRandom<T> {
      * @param element The element.
      * @return The created {@link WeightedRandom}.
      */
-    public static <T> WeightedRandom<T> of(Weighted<T> element) {
+    public static <T> WeightedRandom<T> of(Weighted<? extends T> element) {
         if (element.weight() <= 0) {
             return of();
         }
@@ -490,10 +493,9 @@ public class WeightedRandom<T> {
     }
 
     public static class Builder<T> {
-        private final Object2IntMap<T> elements = new Object2IntOpenHashMap<>();
+        private final List<Weighted<? extends T>> elements = new ArrayList<>();
 
         private Builder() {
-            elements.defaultReturnValue(0);
         }
 
         /**
@@ -503,12 +505,7 @@ public class WeightedRandom<T> {
          * @param weight  The weight.
          */
         public Builder<T> add(T element, int weight) {
-            if (weight <= 0) {
-                return this;
-            }
-
-            elements.put(element, elements.getInt(element) + weight);
-            return this;
+            return add(new Weighted<>(element, weight));
         }
 
         /**
@@ -526,7 +523,12 @@ public class WeightedRandom<T> {
          * @param element The element.
          */
         public Builder<T> add(Weighted<? extends T> element) {
-            return add(element.value(), element.weight());
+            if (element.weight() <= 0) {
+                return this;
+            }
+
+            elements.add(element);
+            return this;
         }
 
         /**
@@ -602,23 +604,35 @@ public class WeightedRandom<T> {
             }
 
             if (len == 1) {
-                var elem = elements.object2IntEntrySet().iterator().next();
-                return of(elem.getKey(), elem.getIntValue());
+                var elem = elements.getFirst();
+                return of(elem);
             }
+
+            // Flatten to map so that weights add up
+            // Use linked map to keep semantics dependent on builder order
+            // and not hash code
+            var map = new Object2IntLinkedOpenHashMap<T>();
+            map.defaultReturnValue(0);
+
+            for (var elem : elements) {
+                map.addTo(elem.value(), elem.weight());
+            }
+
+            // Since elements might have merged, the amount of distinct
+            // elements may have changed
+            len = map.size();
 
             var weights = new int[len];
             var values = new Object[len];
 
             var gcd = 0;
             var total = 0;
-            var weighteds = new ArrayList<Weighted<T>>();
 
             var i = 0;
-            for (var entry : elements.object2IntEntrySet()) {
+            for (var entry : map.object2IntEntrySet()) {
                 var val = entry.getKey();
                 var wgt = entry.getIntValue();
 
-                weighteds.add(new Weighted<>(val, wgt));
                 values[i] = val;
                 weights[i] = wgt;
 
@@ -636,8 +650,8 @@ public class WeightedRandom<T> {
             return new WeightedRandom<>(
                     total,
                     gcd,
-                    List.copyOf(weighteds),
-                    Map.copyOf(elements),
+                    List.copyOf(elements),
+                    Object2IntMaps.unmodifiable(map),
                     buildSelector(total, gcd, len, weights, values)
             );
         }
